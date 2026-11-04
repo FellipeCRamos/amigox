@@ -1,0 +1,7 @@
+enviar/node_modules/
+enviar/auth-amigox/
+enviar/package-lock.json
+fila-amigox*.json
+amigox-backup*.json
+.DS_Store
+Thumbs.db

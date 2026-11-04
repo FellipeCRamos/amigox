@@ -1,0 +1,1761 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Toque para descobrir quem você tirou no Amigo X da SEMAM Fundão. O link é só seu.">
+<meta property="og:title" content="Seu papelzinho do Amigo X chegou 🎁">
+<meta property="og:description" content="Toque para descobrir quem você tirou. O link é só seu: não encaminhe.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Amigo X da SEMAM">
+<meta property="og:url" content="https://fellipecramos.github.io/amigox/">
+<meta property="og:image" content="https://fellipecramos.github.io/amigox/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Papelzinho dobrado com um selo dourado: seu papelzinho do Amigo X chegou.">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0E3B66">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='5' y='9' width='38' height='30' rx='3' fill='%23FFF8E7' stroke='%23D9C690' stroke-width='1.5'/%3E%3Cpath d='M5 19 L24 28.5 L43 19' fill='none' stroke='%23D9C690' stroke-width='1.5'/%3E%3Ccircle cx='24' cy='28' r='8' fill='%23F2C14E'/%3E%3Cpath d='M21 25l6 6M27 25l-6 6' stroke='%230E3B66' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>Amigo X da SEMAM</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=Caveat:wght@700&display=swap">
+<style>
+/* Layout: faixa institucional azul no topo (SEMAM · Prefeitura de Fundão), bancada de uma coluna com 5 etapas
+   numeradas (ordem real: evento, pessoas, regras, mensagem, envio). A revelação é um papelzinho creme com selo
+   dourado sobre um fundo mar-e-mata (azul profundo → verde), com folhas à deriva. */
+:root {
+  --bg: #EEF3F7;
+  --surface: #FFFFFF;
+  --surface-2: #F3F7FA;
+  --ink: #0F2740;
+  --muted: #4E6478;
+  --line: #D2DDE7;
+  --blue: #1F6FB2;
+  --blue-deep: #0E3B66;
+  --blue-ink: #FFFFFF;
+  --blue-soft: #DCEBF8;
+  --green: #1E8A4C;
+  --green-soft: #DCF2E4;
+  --gold: #F2C14E;
+  --gold-ink: #2A1F05;
+  --field: #0B2A4A;
+  --field-2: #0F4D33;
+  --field-ink: #F1F6FA;
+  --field-muted: #AFC4D6;
+  --leaf-1: #2E9D5C; --leaf-2: #6CC48E; --leaf-3: #1E6F49; --leaf-4: #F2C14E;
+  --slip: #FFF8E7; --slip-ink: #22304A; --slip-muted: #6B6250; --slip-line: #EFE3C6; --slip-fold: #D9C690; --slip-shadow: rgb(2 16 32 / .45);
+  --seal: #F2C14E; --seal-ink: #0E3B66;
+  --ok: #1C6A3C; --ok-bg: #DCF2E4;
+  --warn: #855000; --warn-bg: #FBEFD8;
+  --bad: #A2262B; --bad-bg: #F9E3E1;
+  --chat: #E5DDD5; --bubble: #D9FDD3; --bubble-ink: #111B21; --bubble-shadow: rgb(11 20 26 / .13); --link: #0B6FA4;
+  --overlay: rgb(8 24 40 / .5);
+  --shadow: 0 1px 2px rgb(15 39 64 / .05), 0 10px 30px rgb(15 39 64 / .07);
+  --shadow-lg: 0 14px 44px rgb(8 24 40 / .25);
+  --font-display: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace;
+  --r: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1620; --surface: #122230; --surface-2: #172A3A; --ink: #E6EEF5; --muted: #9FB3C4; --line: #253B4D;
+    --blue: #5BA3E6; --blue-deep: #0C2C4C; --blue-ink: #FFFFFF; --blue-soft: #16304A;
+    --green: #4FC37E; --green-soft: #143426; --gold: #F2C14E; --gold-ink: #2A1F05;
+    --field: #071B30; --field-2: #0A3A26; --field-ink: #F1F6FA; --field-muted: #A9BED0;
+    --slip: #FBF3DF; --slip-ink: #22304A; --slip-muted: #6B6250; --slip-line: #ECDFBE; --slip-fold: #D3BF86; --slip-shadow: rgb(0 0 0 / .6);
+    --seal: #F2C14E; --seal-ink: #0E3B66;
+    --ok: #82D6A2; --ok-bg: #163222; --warn: #F2B860; --warn-bg: #33260E; --bad: #F2908A; --bad-bg: #391918;
+    --chat: #0B141A; --bubble: #005C4B; --bubble-ink: #E9EDEF; --bubble-shadow: rgb(0 0 0 / .4); --link: #53BDEB;
+    --overlay: rgb(0 0 0 / .64);
+    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 10px 30px rgb(0 0 0 / .25);
+    --shadow-lg: 0 14px 44px rgb(0 0 0 / .55);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1620; --surface: #122230; --surface-2: #172A3A; --ink: #E6EEF5; --muted: #9FB3C4; --line: #253B4D;
+  --blue: #5BA3E6; --blue-deep: #0C2C4C; --blue-ink: #FFFFFF; --blue-soft: #16304A;
+  --green: #4FC37E; --green-soft: #143426; --gold: #F2C14E; --gold-ink: #2A1F05;
+  --field: #071B30; --field-2: #0A3A26; --field-ink: #F1F6FA; --field-muted: #A9BED0;
+  --slip: #FBF3DF; --slip-ink: #22304A; --slip-muted: #6B6250; --slip-line: #ECDFBE; --slip-fold: #D3BF86; --slip-shadow: rgb(0 0 0 / .6);
+  --seal: #F2C14E; --seal-ink: #0E3B66;
+  --ok: #82D6A2; --ok-bg: #163222; --warn: #F2B860; --warn-bg: #33260E; --bad: #F2908A; --bad-bg: #391918;
+  --chat: #0B141A; --bubble: #005C4B; --bubble-ink: #E9EDEF; --bubble-shadow: rgb(0 0 0 / .4); --link: #53BDEB;
+  --overlay: rgb(0 0 0 / .64);
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 10px 30px rgb(0 0 0 / .25);
+  --shadow-lg: 0 14px 44px rgb(0 0 0 / .55);
+  color-scheme: dark;
+}
+
+html { -webkit-text-size-adjust: 100%; height: 100%; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--font-body); -webkit-font-smoothing: antialiased; }
+body.in-reveal { background: var(--field); }
+[hidden] { display: none !important; }
+button, input, select, textarea { font: inherit; color: inherit; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.muted { color: var(--muted); }
+h1, h2, h3 { text-wrap: balance; }
+
+/* ---------- faixa institucional ---------- */
+.band { background: var(--blue-deep); color: var(--blue-ink); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.09' stroke-width='1.6'%3E%3Cpath d='M30 110c0-28 18-46 46-46-2 28-18 46-46 46zM30 110l40-40'/%3E%3Cpath d='M120 60c0-22-14-36-36-36 2 22 14 36 36 36zM120 60L90 30'/%3E%3C/g%3E%3C/svg%3E"); }
+.band-inner { max-width: 880px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; }
+.lockup { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.logo { height: 44px; width: auto; max-width: 120px; flex: none; background: #fff; border-radius: 8px; padding: 3px; }
+.lockup-text { display: grid; gap: 1px; min-width: 0; }
+.lockup-text b { font: 800 17px/1.1 var(--font-display); letter-spacing: .06em; }
+.lockup-text span { font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; opacity: .85; line-height: 1.25; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; font-size: 14px; font-weight: 700; background: var(--gold); color: var(--gold-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; }
+.chip.warn { background: var(--surface); color: var(--warn); }
+.chip.ok { background: var(--green); color: #fff; }
+
+/* ---------- organizador ---------- */
+.wrap { max-width: 880px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 26px 56px; }
+.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 20px; padding-bottom: 20px; }
+.brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.mark { width: 58px; height: 58px; flex: none; filter: drop-shadow(0 2px 3px rgb(15 39 64 / .18)); }
+.m-paper { fill: var(--slip); stroke: var(--slip-fold); stroke-width: 1.5; }
+.m-fold { fill: none; stroke: var(--slip-fold); stroke-width: 1.5; }
+.m-seal { fill: var(--seal); }
+.m-x { stroke: var(--seal-ink); stroke-width: 2.6; stroke-linecap: round; }
+.title { font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 5.4vw, 38px); line-height: 1.02; letter-spacing: -0.02em; margin: 0; }
+.subtitle { margin: 6px 0 0; color: var(--muted); font-size: 15.5px; max-width: 54ch; }
+
+.step { padding-block: 26px; border-top: 1px solid var(--line); }
+.step-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+.num { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--blue); color: var(--blue-ink); font: 800 14px/1 var(--font-display); margin-top: 1px; }
+.step h2 { margin: 0; font: 800 21px/1.15 var(--font-display); letter-spacing: -0.01em; }
+.hint { margin: 4px 0 0; color: var(--muted); font-size: 15px; max-width: 64ch; }
+.step.primary { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin-top: 6px; box-shadow: var(--shadow); }
+.step.primary .num { background: var(--green); }
+
+.fields { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.fields .w2 { grid-column: span 2; }
+@media (max-width: 680px) { .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fields .w2 { grid-column: 1 / -1; } }
+.f { display: grid; gap: 6px; font-size: 14px; font-weight: 700; min-width: 0; align-content: start; }
+input[type="text"], input[type="tel"], input[type="date"], input[type="time"], input[type="url"], select, textarea {
+  width: 100%; min-width: 0; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px; font-size: 16px; font-weight: 400;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; border-color: var(--blue); }
+input:disabled, select:disabled, textarea:disabled { opacity: .7; cursor: not-allowed; background: var(--surface-2); }
+textarea { resize: vertical; line-height: 1.45; min-height: 140px; }
+::placeholder { color: var(--muted); opacity: .85; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15px/1.15 var(--font-body); padding: 11px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; text-decoration: none; min-height: 44px; text-align: center; transition: transform .12s ease, border-color .12s ease; }
+.btn:hover { border-color: var(--blue); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.btn.primary { background: var(--blue); color: var(--blue-ink); border-color: var(--blue); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.go { background: var(--green); color: #fff; border-color: var(--green); }
+.btn.go:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--blue); padding-inline: 8px; }
+.btn.ghost:hover { text-decoration: underline; }
+.btn.danger { color: var(--bad); }
+.btn.danger-solid { background: var(--bad); color: #fff; border-color: var(--bad); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .5; cursor: not-allowed; filter: none; transform: none; }
+.btn.big { width: 100%; min-height: 60px; font-size: 17px; padding: 14px 18px; flex-direction: column; gap: 3px; }
+.btn.sm { min-height: 38px; padding: 8px 12px; font-size: 14px; }
+.next-sub { font: 400 14px/1.2 var(--font-body); opacity: .9; font-variant-numeric: tabular-nums; }
+.row-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.inline { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
+.inline input { width: 4.2em; text-align: center; }
+
+.people-head, .prow { display: grid; grid-template-columns: 26px minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1.25fr) 44px; gap: 8px 10px; }
+.people-head { font-size: 13px; font-weight: 700; color: var(--muted); padding-bottom: 6px; }
+.people-head em { font-style: normal; font-weight: 400; }
+.people { display: grid; gap: 8px; }
+.prow { align-items: start; }
+.idx { font: 700 14px/44px var(--font-body); color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.c-name, .c-wish, .c-phone label { display: block; min-width: 0; }
+.c-phone { display: grid; gap: 4px; min-width: 0; }
+.pstate { font-size: 13px; font-weight: 700; line-height: 1.3; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.pstate.ok { color: var(--ok); } .pstate.warn { color: var(--warn); } .pstate.bad { color: var(--bad); }
+.iconbtn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; border: 1px solid transparent; background: transparent; color: var(--muted); cursor: pointer; font-size: 17px; }
+.iconbtn:hover { color: var(--bad); border-color: var(--line); background: var(--surface); }
+.iconbtn:focus-visible { outline: 2px solid var(--blue); }
+.iconbtn:disabled { visibility: hidden; }
+@media (max-width: 640px) {
+  .people-head { display: none; }
+  .prow { grid-template-columns: 22px minmax(0, 1fr) 44px; grid-template-areas: "i n x" ". p p" ". w w"; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .prow .idx { grid-area: i; } .prow .c-name { grid-area: n; } .prow .c-phone { grid-area: p; } .prow .c-wish { grid-area: w; } .prow .iconbtn { grid-area: x; }
+}
+.empty { margin: 0; padding: 18px; border: 1.5px dashed var(--line); border-radius: var(--r); color: var(--muted); text-align: center; }
+.paste { margin-top: 14px; display: grid; gap: 4px; }
+.paste .row-actions { margin-top: 8px; }
+.locked-note { margin: 14px 0 0; padding: 10px 14px; border-radius: 10px; background: var(--blue-soft); color: var(--ink); font-weight: 700; font-size: 14.5px; }
+
+.toggle { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); cursor: pointer; }
+.toggle input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--blue); flex: none; }
+.toggle b { display: block; }
+.toggle span span { color: var(--muted); font-size: 15px; }
+.rule-add { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.rule-add select { flex: 1 1 170px; width: auto; }
+.rule-add .mid { font-weight: 700; color: var(--muted); }
+.check { display: inline-flex; gap: 8px; align-items: center; font-size: 15px; cursor: pointer; }
+.check input { width: 18px; height: 18px; margin: 0; accent-color: var(--blue); }
+.rules { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.rules li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 6px 6px 14px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); }
+.rules li > span { min-width: 0; overflow-wrap: anywhere; }
+.rules .x { font-weight: 800; color: var(--bad); padding-inline: 4px; }
+
+.msg-grid { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 760px) { .msg-grid { grid-template-columns: minmax(0, 1fr); } }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; align-items: center; font-size: 14px; color: var(--muted); }
+.tag { font: 700 13px/1 var(--font-mono); padding: 6px 8px; border-radius: 7px; border: 1px solid var(--line); background: var(--surface); color: var(--blue); cursor: pointer; }
+.tag:hover { border-color: var(--blue); }
+.tag:focus-visible { outline: 2px solid var(--blue); }
+.small-note { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); }
+.f-label { font-size: 14px; font-weight: 700; margin: 0 0 6px; }
+.chat { background: var(--chat); border-radius: var(--r); padding: 16px 14px; border: 1px solid var(--line); min-width: 0; }
+.bubble { margin-left: auto; max-width: 100%; background: var(--bubble); color: var(--bubble-ink); padding: 8px 10px 6px; border-radius: 10px 2px 10px 10px; white-space: pre-wrap; overflow-wrap: anywhere; font: 15px/1.38 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; box-shadow: 0 1px 1px var(--bubble-shadow); }
+.bubble .lnk { color: var(--link); text-decoration: underline; }
+.bubble .tm { display: block; text-align: right; font-size: 11px; opacity: .65; margin-top: 2px; }
+.msg-grid .row-actions { margin-top: 12px; }
+
+.checks { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 9px; }
+.checks li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 15px; }
+.checks .ic { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 800 13px/1 var(--font-body); margin-top: 1px; }
+.checks .ok .ic { background: var(--ok-bg); color: var(--ok); }
+.checks .bad .ic { background: var(--bad-bg); color: var(--bad); }
+.checks .warn .ic { background: var(--warn-bg); color: var(--warn); }
+.test-row { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-top: 14px; }
+.test-row .hint { margin: 0; flex: 1 1 260px; font-size: 14px; }
+.drawn { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 16px; }
+.code { font: 800 22px/1 var(--font-display); letter-spacing: .01em; }
+.code b { color: var(--blue); }
+.mode { flex-basis: 100%; margin: 4px 0 0; font-size: 14.5px; color: var(--muted); }
+.method { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; margin-bottom: 14px; }
+.method label { font-size: 14px; font-weight: 700; }
+.method select { width: auto; flex: 1 1 240px; max-width: 380px; }
+.progress { height: 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--blue), var(--green)); transition: width .45s cubic-bezier(.2, .8, .2, 1); }
+.prog-text { margin: 8px 0 14px; font-size: 14.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.send-hint { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+.send-list { margin-top: 18px; }
+.srow { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.srow .who { min-width: 0; }
+.srow .who b { display: block; overflow-wrap: anywhere; }
+.srow .who small { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 13.5px; }
+.status { font-size: 13px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: var(--surface-2); color: var(--muted); white-space: nowrap; border: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.status.done { background: var(--ok-bg); color: var(--ok); border-color: transparent; animation: pop .35s ease; }
+.status.auto { background: var(--blue-soft); color: var(--ink); border-color: transparent; }
+@keyframes pop { 0% { transform: scale(.85); } 60% { transform: scale(1.06); } 100% { transform: scale(1); } }
+.acts { display: flex; gap: 6px; }
+@media (max-width: 560px) { .srow { grid-template-columns: minmax(0, 1fr) auto; } .srow .acts { grid-column: 1 / -1; } .srow .acts .btn { flex: 1; } }
+.post-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.auto { margin-top: 18px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface-2); padding: 14px 16px; }
+.auto summary { cursor: pointer; font-weight: 700; }
+.auto summary::marker { color: var(--blue); }
+.auto p { margin: 10px 0 0; font-size: 14.5px; }
+.auto p + p { margin-top: 6px; }
+.auto code { font: 700 13px/1.4 var(--font-mono); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; }
+.auto .row-actions { margin-top: 10px; }
+
+.tools h2 { margin: 0; font: 800 18px/1.2 var(--font-display); }
+details.adv { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line); }
+details.adv summary { cursor: pointer; font-weight: 700; color: var(--blue); }
+details.adv .f { margin-top: 10px; }
+.foot { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); }
+.credit { margin: 28px 0 0; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13.5px; color: var(--muted); }
+.credit b { color: var(--ink); }
+
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--overlay); }
+.modal-box { width: 100%; max-width: 480px; max-height: 100%; overflow: auto; background: var(--surface); color: var(--ink); border-radius: 16px; padding: 22px; border: 1px solid var(--line); box-shadow: var(--shadow-lg); display: grid; gap: 14px; }
+.modal-box h3 { margin: 0; font: 800 21px/1.2 var(--font-display); }
+.modal-box p { margin: 0; }
+.modal-box textarea { min-height: 150px; font: 13px/1.4 var(--font-mono); }
+.modal-box .row-actions { margin-top: 4px; }
+
+/* sorteio animado */
+.draw-box { width: 100%; max-width: 420px; background: var(--surface); color: var(--ink); border-radius: 18px; padding: 26px 22px 22px; border: 1px solid var(--line); box-shadow: var(--shadow-lg); display: grid; gap: 14px; justify-items: center; text-align: center; }
+.hat { position: relative; width: 220px; height: 150px; }
+.paper { position: absolute; left: 50%; top: 50%; width: 74px; height: 50px; margin: -25px 0 0 -37px; background: var(--slip); border: 1px solid var(--slip-fold); border-radius: 4px; box-shadow: 0 4px 12px rgb(2 16 32 / .18); display: grid; place-items: center; font: 700 15px/1 var(--font-hand); color: var(--slip-muted); overflow: hidden; }
+.paper::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--slip-fold); opacity: .7; }
+.shuffling .paper { animation: shuffle 1.1s ease-in-out infinite; }
+.shuffling .p1 { animation-delay: 0s; } .shuffling .p2 { animation-delay: .18s; } .shuffling .p3 { animation-delay: .36s; } .shuffling .p4 { animation-delay: .54s; } .shuffling .p5 { animation-delay: .72s; }
+@keyframes shuffle {
+  0% { transform: translate(0, 0) rotate(-8deg); }
+  25% { transform: translate(-60px, -34px) rotate(14deg); }
+  50% { transform: translate(55px, -46px) rotate(-16deg); }
+  75% { transform: translate(-30px, 30px) rotate(9deg); }
+  100% { transform: translate(0, 0) rotate(-8deg); }
+}
+.draw-status { margin: 0; font-weight: 700; font-size: 16px; }
+.draw-result { display: grid; gap: 8px; justify-items: center; }
+.draw-check { width: 64px; height: 64px; border-radius: 50%; background: var(--green-soft); color: var(--green); display: grid; place-items: center; font: 800 30px/1 var(--font-display); animation: pop .45s ease; }
+.draw-result h3 { margin: 0; font: 800 22px/1.15 var(--font-display); }
+.draw-result p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 34ch; }
+.draw-result .btn { margin-top: 6px; }
+
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 14px); opacity: 0; pointer-events: none; z-index: 60; width: max-content; max-width: calc(100% - 32px); background: var(--ink); color: var(--bg); padding: 12px 16px; border-radius: 12px; font-weight: 700; font-size: 15px; box-shadow: var(--shadow-lg); transition: opacity .2s, transform .2s; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.bad { background: var(--bad); color: #fff; }
+
+/* ---------- revelação ---------- */
+.reveal { position: relative; min-height: 100%; background: radial-gradient(120% 60% at 50% 0%, var(--field-2) 0%, var(--field) 70%); color: var(--field-ink); overflow: hidden; }
+.leaves { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.rv-demo { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); background: var(--gold); color: var(--gold-ink); font-weight: 700; font-size: 14.5px; }
+.rv-inner { position: relative; z-index: 1; max-width: 540px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 48px; display: grid; gap: 18px; justify-items: center; text-align: center; }
+.rv-lockup { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px; border-radius: 999px; background: rgb(255 255 255 / .1); border: 1px solid rgb(255 255 255 / .18); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--field-ink); }
+.rv-lockup .logo { height: 30px; max-width: 80px; padding: 2px; border-radius: 6px; }
+.rv-lockup .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.rv-event { margin: 0; font: 800 13px/1.3 var(--font-display); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.rv-hello { margin: 0; font: 800 clamp(36px, 10vw, 56px)/1.02 var(--font-display); letter-spacing: -0.025em; overflow-wrap: anywhere; }
+.rv-lede { margin: 0; color: var(--field-muted); font-size: 16.5px; max-width: 34ch; text-wrap: balance; }
+.rv-in { animation: rise .7s cubic-bezier(.2, .8, .2, 1) both; }
+.rv-in.d1 { animation-delay: .08s; } .rv-in.d2 { animation-delay: .18s; } .rv-in.d3 { animation-delay: .28s; } .rv-in.d4 { animation-delay: .42s; } .rv-in.d5 { animation-delay: .6s; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.slip { appearance: none; -webkit-appearance: none; border: 0; padding: 0; margin: 10px 0 4px; background: none; cursor: pointer; width: min(100%, 400px); display: block; perspective: 1100px; border-radius: 6px; color: var(--slip-ink); }
+.slip:focus-visible { outline: 3px solid var(--gold); outline-offset: 8px; }
+.slip-paper { position: relative; display: grid; place-items: center; min-height: 250px; border-radius: 4px; background-color: var(--slip); background-image: repeating-linear-gradient(to bottom, transparent 0 31px, var(--slip-line) 31px 32px); background-position: 0 20px; box-shadow: 0 24px 48px var(--slip-shadow); transform: rotate(-1.4deg); }
+.slip:not(.is-open) .slip-paper { animation: breathe 4s ease-in-out infinite; }
+@keyframes breathe { 0%, 100% { transform: rotate(-1.4deg) translateY(0); } 50% { transform: rotate(-0.6deg) translateY(-4px); } }
+.slip-content { display: grid; gap: 8px; justify-items: center; padding: 34px 22px 30px; visibility: hidden; opacity: 0; transition: opacity .45s ease .3s, visibility 0s linear .3s; }
+.slip.is-open .slip-content { visibility: visible; opacity: 1; transition-delay: .3s, 0s; }
+.slip-label { font: 800 12px/1 var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--slip-muted); }
+.slip-name { font: 700 clamp(46px, 13vw, 78px)/1.02 var(--font-hand); color: var(--slip-ink); overflow-wrap: anywhere; text-wrap: balance; padding: 2px 6px; outline: none; }
+.slip.is-open .slip-name { animation: write 1.1s steps(28, end) .55s both; }
+@keyframes write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.slip-wish { font-size: 15.5px; color: var(--slip-muted); max-width: 28ch; text-wrap: balance; }
+.slip-wish b { color: var(--slip-ink); }
+.slip-flap { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 12px; padding: 20px; border-radius: 4px; background-color: var(--slip); background-image: linear-gradient(to bottom, transparent calc(50% - 1px), var(--slip-fold) calc(50% - 1px), var(--slip-fold) calc(50% + 1px), transparent calc(50% + 1px)), repeating-linear-gradient(to bottom, transparent 0 31px, var(--slip-line) 31px 32px); background-position: 0 0, 0 20px; transform-origin: 50% 0; transition: transform .8s cubic-bezier(.3, .7, .2, 1), opacity .3s ease .45s; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.slip.is-open .slip-flap { transform: rotateX(-172deg); opacity: 0; pointer-events: none; }
+.seal { width: 78px; height: 78px; border-radius: 50%; background: var(--seal); color: var(--seal-ink); display: grid; place-items: center; font: 800 36px/1 var(--font-display); transform: rotate(-9deg); box-shadow: 0 3px 10px var(--slip-shadow), inset 0 0 0 4px rgb(255 255 255 / .35); }
+.flap-cta { font: 700 17px/1.2 var(--font-body); color: var(--slip-ink); }
+.flap-sub { font: 700 24px/1.1 var(--font-hand); color: var(--slip-muted); overflow-wrap: anywhere; }
+.rv-after { display: grid; gap: 10px; justify-items: center; animation: rise .5s ease both; }
+.rv-secret { margin: 0; font-weight: 700; }
+.btn.on-field { background: transparent; color: var(--field-ink); border-color: var(--field-muted); }
+.btn.on-field:hover { border-color: var(--field-ink); }
+.btn.on-field:focus-visible { outline-color: var(--gold); }
+.rv-details { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 30px; margin: 4px 0 0; }
+.rv-details > div { display: grid; gap: 2px; }
+.rv-details dt { font: 800 11.5px/1.3 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.rv-details dd { margin: 0; font-weight: 700; color: var(--field-ink); font-variant-numeric: tabular-nums; }
+.rv-fine { margin: 6px 0 0; font-size: 13.5px; color: var(--field-muted); max-width: 38ch; }
+.rv-credit { margin: 18px 0 0; font-size: 12.5px; color: var(--field-muted); letter-spacing: .02em; }
+.rv-credit b { color: var(--field-ink); font-weight: 700; }
+.confetti { position: fixed; inset: 0; pointer-events: none; z-index: 40; }
+@media (prefers-reduced-motion: reduce) {
+  .slip-flap, .slip-content, .progress i, .toast, .btn { transition: none !important; }
+  .rv-in, .slip:not(.is-open) .slip-paper, .slip.is-open .slip-name, .status.done, .draw-check, .rv-after, .shuffling .paper { animation: none !important; }
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:24px;font:16px/1.5 system-ui">Esta página precisa de JavaScript ligado para funcionar.</p></noscript>
+
+<div id="organizer" hidden>
+  <header class="band">
+    <div class="band-inner">
+      <div class="lockup">
+        <img class="logo" id="logoTop" src="logo.png" alt="Prefeitura de Fundão" hidden>
+        <div class="lockup-text"><b>SEMAM</b><span>Secretaria Municipal de Meio Ambiente · Prefeitura de Fundão</span></div>
+      </div>
+      <span class="chip" id="statusChip">Comece pela lista</span>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+          <rect class="m-paper" x="5" y="9" width="38" height="30" rx="3"></rect>
+          <path class="m-fold" d="M5 19 L24 28.5 L43 19"></path>
+          <circle class="m-seal" cx="24" cy="28" r="8"></circle>
+          <path class="m-x" d="M21 25 l6 6 M27 25 l-6 6"></path>
+        </svg>
+        <div>
+          <h1 class="title">Sorteador Amigo X</h1>
+          <p class="subtitle">Cada pessoa recebe no WhatsApp um link que abre só o próprio papelzinho. O painel nunca mostra quem tirou quem.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="step" id="s-evento" aria-labelledby="h-evento">
+      <div class="step-head"><span class="num">1</span><div><h2 id="h-evento">Evento</h2><p class="hint">Aparece na mensagem e no papelzinho de cada um.</p></div></div>
+      <div class="fields">
+        <label class="f w2">Nome do evento <input type="text" id="evName" maxlength="60" autocomplete="off"></label>
+        <label class="f w2">Local <input type="text" id="evPlace" maxlength="60" placeholder="Ex.: Sede da SEMAM" autocomplete="off"></label>
+        <label class="f">Data <input type="date" id="evDate"></label>
+        <label class="f">Horário <input type="time" id="evTime"></label>
+        <label class="f">Valor sugerido <input type="text" id="evPrice" maxlength="30" placeholder="Ex.: R$ 50" autocomplete="off"></label>
+        <label class="f">Quem organiza <input type="text" id="evOrg" maxlength="40" placeholder="Seu nome" autocomplete="off"></label>
+      </div>
+    </section>
+
+    <section class="step" id="s-pessoas" aria-labelledby="h-pessoas">
+      <div class="step-head"><span class="num">2</span><div><h2 id="h-pessoas">Participantes</h2><p class="hint">Nome e WhatsApp com DDD. A sugestão de presente aparece para quem tirar a pessoa.</p></div></div>
+      <div class="people-head" id="peopleHead" aria-hidden="true"><span></span><span>Nome</span><span>WhatsApp</span><span>Sugestão de presente <em>(opcional)</em></span><span></span></div>
+      <div class="people" id="people"></div>
+      <p class="empty" id="peopleEmpty">A lista está vazia. Cole a lista da equipe abaixo (dá para copiar direto de uma planilha) ou adicione uma pessoa por vez.</p>
+      <div class="row-actions" id="peopleActions">
+        <button class="btn" type="button" id="addPerson">+ Adicionar pessoa</button>
+        <button class="btn ghost" type="button" id="togglePaste" aria-expanded="false" aria-controls="pasteBox">Colar uma lista</button>
+        <label class="inline" for="ddd">DDD padrão <input type="text" id="ddd" inputmode="numeric" maxlength="2" autocomplete="off"></label>
+      </div>
+      <div class="paste" id="pasteBox" hidden>
+        <label class="f" for="pasteText">Uma pessoa por linha: nome, WhatsApp e, se quiser, a sugestão de presente</label>
+        <textarea id="pasteText" rows="6" placeholder="Ana Paula Souza, (27) 99876-5432, livro de receitas&#10;Bruno Lima; 27 99123-4567&#10;Carla Menezes	998877665	chocolate amargo"></textarea>
+        <div class="row-actions"><button class="btn primary" type="button" id="doImport">Adicionar à lista</button><span class="muted" id="importMsg" role="status"></span></div>
+      </div>
+      <p class="locked-note" id="peopleLocked" hidden>Sorteio feito: a lista está travada. Para mudar alguém, desfaça o sorteio no passo 5.</p>
+    </section>
+
+    <section class="step" id="s-regras" aria-labelledby="h-regras">
+      <div class="step-head"><span class="num">3</span><div><h2 id="h-regras">Regras</h2><p class="hint">Opcional. Serve para casais ou para qualquer dupla que o grupo combinar que não pode se tirar.</p></div></div>
+      <label class="toggle" for="singleCycle"><input type="checkbox" id="singleCycle"><span><b>Roda única</b><span>Ninguém forma dupla fechada. Na revelação, quem recebe o presente é quem revela em seguida, até a roda passar por todo mundo.</span></span></label>
+      <div class="rule-add">
+        <select id="ruleA" aria-label="Pessoa"></select>
+        <span class="mid">não pode tirar</span>
+        <select id="ruleB" aria-label="Pessoa que não pode ser tirada"></select>
+        <label class="check" for="ruleBoth"><input type="checkbox" id="ruleBoth" checked> e vice-versa</label>
+        <button class="btn" type="button" id="addRule">Adicionar regra</button>
+      </div>
+      <ul class="rules" id="rules"></ul>
+    </section>
+
+    <section class="step" id="s-msg" aria-labelledby="h-msg">
+      <div class="step-head"><span class="num">4</span><div><h2 id="h-msg">Mensagem</h2><p class="hint">Texto que abre pronto no WhatsApp. O nome sorteado não aparece nele: vai escondido no link.</p></div></div>
+      <div class="msg-grid">
+        <div>
+          <label class="f" for="tpl">Modelo da mensagem</label>
+          <textarea id="tpl" rows="13" spellcheck="true"></textarea>
+          <div class="tags" id="tags">Campos:
+            <button class="tag" type="button" data-tag="{nome}">{nome}</button>
+            <button class="tag" type="button" data-tag="{primeiro_nome}">{primeiro_nome}</button>
+            <button class="tag" type="button" data-tag="{link}">{link}</button>
+            <button class="tag" type="button" data-tag="{evento}">{evento}</button>
+            <button class="tag" type="button" data-tag="{data}">{data}</button>
+            <button class="tag" type="button" data-tag="{local}">{local}</button>
+            <button class="tag" type="button" data-tag="{valor}">{valor}</button>
+            <button class="tag" type="button" data-tag="{organizador}">{organizador}</button>
+            <button class="tag" type="button" data-tag="{codigo}">{codigo}</button>
+          </div>
+          <p class="small-note">Linha com campo vazio some da mensagem. Use *asteriscos* para negrito, como no WhatsApp.</p>
+          <div class="row-actions"><button class="btn ghost" type="button" id="resetTpl">Voltar ao texto padrão</button></div>
+        </div>
+        <div>
+          <p class="f-label">Prévia</p>
+          <div class="chat"><div class="bubble" id="bubble"></div></div>
+          <div class="row-actions"><button class="btn" type="button" id="demoReveal">Ver a tela que o participante abre</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step primary" id="s-envio" aria-labelledby="h-envio">
+      <div class="step-head"><span class="num">5</span><div><h2 id="h-envio">Sortear e enviar</h2><p class="hint" id="sendHint">Confira os itens abaixo e sorteie. Depois do sorteio, a lista trava.</p></div></div>
+      <div id="preDraw">
+        <ul class="checks" id="checks"></ul>
+        <button class="btn go big" type="button" id="drawBtn">Sortear</button>
+        <div class="test-row">
+          <a class="btn sm" id="testLink" target="_blank" rel="noopener">Testar a página de revelação</a>
+          <p class="hint">Abre um papelzinho de exemplo no endereço público. Faça isso uma vez, de preferência no celular, antes de enviar para todos.</p>
+        </div>
+      </div>
+      <div id="postDraw" hidden>
+        <div class="drawn">
+          <span class="code">Sorteio #<b id="drawCode"></b></span>
+          <span class="muted" id="drawWhen"></span>
+          <p class="mode" id="drawMode"></p>
+        </div>
+        <div class="method">
+          <label for="method">Abrir com</label>
+          <select id="method"></select>
+        </div>
+        <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
+        <p class="prog-text" id="progText" role="status"></p>
+        <a class="btn primary big" id="nextBtn" rel="noopener"><span id="nextLabel">Abrir WhatsApp</span><span class="next-sub" id="nextSub"></span></a>
+        <p class="send-hint">O WhatsApp abre com o texto pronto. Confira e aperte <b>Enviar</b> lá; depois volte aqui para o próximo.</p>
+        <details class="auto" id="autoBox">
+          <summary>Envio automático (sem clicar um por um)</summary>
+          <p><b>Com o Claude:</b> abra esta página no Chrome com o WhatsApp Web logado e peça: <code>envia a fila do Amigo X</code>. Ele lê a fila daqui, dispara pelo WhatsApp Web e marca cada envio nesta lista.</p>
+          <p><b>Com o script:</b> exporte a fila e rode o <code>enviar.js</code> do repositório no seu computador; ele envia pelo seu número e faz uma pausa entre as mensagens.</p>
+          <div class="row-actions"><button class="btn sm" type="button" id="exportQueue">Exportar fila (JSON)</button><button class="btn sm" type="button" id="copyQueue">Copiar fila</button></div>
+        </details>
+        <div class="send-list" id="sendList"></div>
+        <div class="post-actions">
+          <button class="btn" type="button" id="undoDraw">Desfazer sorteio</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="step tools" id="s-tools" aria-labelledby="h-tools">
+      <h2 id="h-tools">Backup e endereço</h2>
+      <p class="hint">Tudo fica salvo só neste navegador. Depois de sortear, baixe um backup: com ele dá para reenviar um link a partir de outro aparelho.</p>
+      <div class="row-actions">
+        <button class="btn" type="button" id="dlBackup">Baixar backup</button>
+        <button class="btn" type="button" id="copyBackup">Copiar backup</button>
+        <button class="btn" type="button" id="restoreBtn">Restaurar backup</button>
+        <button class="btn danger" type="button" id="wipe">Apagar tudo</button>
+      </div>
+      <details class="adv" id="advBox">
+        <summary>Endereço da página de revelação</summary>
+        <div id="baseEdit">
+          <label class="f" for="revealBase">Endereço público que os participantes abrem <input type="url" id="revealBase" inputmode="url" autocomplete="off" spellcheck="false"></label>
+          <p class="hint">Precisa abrir sem login no celular de qualquer pessoa, como uma página do GitHub Pages.</p>
+        </div>
+        <p class="hint" id="baseAuto" hidden></p>
+      </details>
+      <p class="foot">Nomes e números ficam neste navegador e não vão para servidor nenhum. O sorteio usa o gerador aleatório criptográfico do próprio navegador.</p>
+      <p class="credit"><span>Sistema desenvolvido por <b>Fellipe Caldeira Ramos</b> · SEMAM Fundão</span><span>Amigo X · v2</span></p>
+    </section>
+  </div>
+</div>
+
+<div id="reveal" class="reveal" hidden>
+  <canvas class="leaves" id="leaves" aria-hidden="true"></canvas>
+  <div class="rv-demo" id="rvDemo" hidden>
+    <span>Exemplo: é isto que cada pessoa vê ao tocar no link.</span>
+    <button class="btn sm" type="button" id="rvBack">Voltar ao sorteador</button>
+  </div>
+  <main class="rv-inner" id="rvOk">
+    <div class="rv-lockup rv-in"><img class="logo" id="logoReveal" src="logo.png" alt="" hidden><span>SEMAM</span><span class="dot" aria-hidden="true"></span><span>Fundão</span></div>
+    <p class="rv-event rv-in d1" id="rvEvent">Amigo X</p>
+    <h1 class="rv-hello rv-in d2" id="rvHello">Olá!</h1>
+    <p class="rv-lede rv-in d3" id="rvLede"></p>
+    <button class="slip rv-in d4" id="slip" type="button" aria-expanded="false" aria-controls="slipContent">
+      <span class="slip-paper">
+        <span class="slip-content" id="slipContent">
+          <span class="slip-label">Você tirou</span>
+          <span class="slip-name" id="rvName" tabindex="-1"></span>
+          <span class="slip-wish" id="rvWish" hidden></span>
+        </span>
+        <span class="slip-flap" aria-hidden="true">
+          <span class="seal">X</span>
+          <span class="flap-cta">Toque para abrir</span>
+          <span class="flap-sub" id="rvFor"></span>
+        </span>
+      </span>
+    </button>
+    <div class="rv-after" id="rvAfter" hidden>
+      <p class="rv-secret">Agora é segredo até o dia da revelação.</p>
+      <button class="btn on-field sm" type="button" id="rvHide">Dobrar de novo</button>
+    </div>
+    <dl class="rv-details rv-in d5" id="rvDetails">
+      <div id="rvWhenBox"><dt>Quando</dt><dd id="rvWhen"></dd></div>
+      <div id="rvWhereBox"><dt>Onde</dt><dd id="rvWhere"></dd></div>
+      <div id="rvPriceBox"><dt>Valor sugerido</dt><dd id="rvPrice"></dd></div>
+    </dl>
+    <p class="rv-fine rv-in d5" id="rvFine"></p>
+    <p class="rv-credit rv-in d5">Sistema desenvolvido por <b>Fellipe Caldeira Ramos</b> · SEMAM Fundão</p>
+  </main>
+  <main class="rv-inner" id="rvBad" hidden>
+    <div class="rv-lockup"><span>SEMAM</span><span class="dot" aria-hidden="true"></span><span>Fundão</span></div>
+    <p class="rv-event">Amigo X</p>
+    <h1 class="rv-hello">Papelzinho rasgado</h1>
+    <p class="rv-lede">O link chegou incompleto. Peça para quem organizou o sorteio reenviar a mensagem.</p>
+  </main>
+</div>
+
+<div class="modal" id="modal" hidden><div class="modal-box" id="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div></div>
+<div class="modal" id="drawModal" hidden>
+  <div class="draw-box" role="dialog" aria-modal="true" aria-labelledby="drawStatus">
+    <div class="hat shuffling" id="hat" aria-hidden="true">
+      <span class="paper p1"></span><span class="paper p2"></span><span class="paper p3"></span><span class="paper p4"></span><span class="paper p5"></span>
+    </div>
+    <p class="draw-status" id="drawStatus">Embaralhando os papelzinhos…</p>
+    <div class="draw-result" id="drawResult" hidden>
+      <span class="draw-check" aria-hidden="true">✓</span>
+      <h3 id="drawResultTitle">Sorteio feito</h3>
+      <p id="drawResultText"></p>
+      <button class="btn go" type="button" id="drawGo">Ir para o envio</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  document.documentElement.lang = 'pt-BR';
+
+  /* ===================== constantes ===================== */
+  const DEFAULT_BASE = 'https://fellipecramos.github.io/amigox/';
+  const STORE_KEY = 'amigox.v1';
+  const SEP = '\u001f';
+  const TOKEN_V = '1';
+  const DEFAULT_TPL = [
+    'Olá, {primeiro_nome}! 🎁',
+    '',
+    'O sorteio do *{evento}* foi feito.',
+    'Toque no link para abrir o seu papelzinho (ele é só seu, não encaminhe):',
+    '{link}',
+    '',
+    '📅 {data}',
+    '📍 {local}',
+    '💰 Valor sugerido: {valor}',
+    '',
+    'Bico calado até a revelação! 🤫',
+    '— {organizador}'
+  ].join('\n');
+
+  const IS_FILE = location.protocol === 'file:';
+  let EMBEDDED = false;
+  try { EMBEDDED = window.self !== window.top; } catch (e) { EMBEDDED = true; }
+  const HOSTED = !IS_FILE && !EMBEDDED && /^https?:$/.test(location.protocol);
+  const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints > 1 && /Macintosh/i.test(navigator.userAgent));
+  const REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  /* ===================== utilidades ===================== */
+  const $ = (s, r) => (r || document).querySelector(s);
+  function h(tag, props) {
+    const e = document.createElement(tag);
+    if (props) {
+      for (const k in props) {
+        const v = props[k];
+        if (v === null || v === undefined || v === false) continue;
+        if (k === 'class') e.className = v;
+        else if (k === 'text') e.textContent = v;
+        else if (k.indexOf('on') === 0) e.addEventListener(k.slice(2), v);
+        else if (v === true) e.setAttribute(k, '');
+        else e.setAttribute(k, v);
+      }
+    }
+    for (let i = 2; i < arguments.length; i++) {
+      const kid = arguments[i];
+      if (kid === null || kid === undefined || kid === false) continue;
+      e.appendChild(kid.nodeType ? kid : document.createTextNode(String(kid)));
+    }
+    return e;
+  }
+  const pad = n => String(n).padStart(2, '0');
+  function fmtTime(ts) { const d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  function fmtDateTime(ts) { const d = new Date(ts); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + ' às ' + fmtTime(ts); }
+  const WEEKDAYS = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+  function fmtWhen(date, time) {
+    let s = '';
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date || '');
+    if (m) {
+      const dt = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+      s = WEEKDAYS[dt.getDay()] + ', ' + m[3] + '/' + m[2];
+    }
+    const t = /^(\d{1,2}):(\d{2})/.exec(time || '');
+    if (t) {
+      const hh = String(Number(t[1]));
+      const label = t[2] === '00' ? hh + 'h' : hh + 'h' + t[2];
+      s = s ? s + ' às ' + label : 'às ' + label;
+    }
+    return s;
+  }
+  function firstName(n) {
+    const parts = String(n || '').trim().split(/\s+/);
+    if (parts.length > 1 && /\.$/.test(parts[0])) return parts[0] + ' ' + parts[1];
+    return parts[0] || '';
+  }
+  const normName = n => String(n || '').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ');
+
+  /* ===================== aleatoriedade ===================== */
+  function randBelow(n) {
+    const buf = new Uint32Array(1);
+    const limit = Math.floor(0x100000000 / n) * n;
+    let x;
+    do { crypto.getRandomValues(buf); x = buf[0]; } while (x >= limit);
+    return x % n;
+  }
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) { const j = randBelow(i + 1); const t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  const CODE_ALPHA = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
+  function makeCode(len) { let s = ''; for (let i = 0; i < len; i++) s += CODE_ALPHA[randBelow(CODE_ALPHA.length)]; return s; }
+
+  /* ===================== telefone ===================== */
+  function normalizePhone(raw, ddd) {
+    const s = String(raw || '').trim();
+    if (!s) return { ok: false, msg: 'Falta o WhatsApp' };
+    const intl = s.charAt(0) === '+';
+    let d = s.replace(/\D/g, '');
+    if (intl && d.indexOf('55') !== 0) {
+      if (d.length >= 8 && d.length <= 15) return { ok: true, digits: d, display: '+' + d, warn: 'número de fora do Brasil' };
+      return { ok: false, msg: 'Número internacional incompleto' };
+    }
+    if (!intl) {
+      d = d.replace(/^0+/, '');
+      const dd = String(ddd || '').replace(/\D/g, '');
+      if (d.length === 8 || d.length === 9) {
+        if (dd.length !== 2) return { ok: false, msg: 'Falta o DDD' };
+        d = dd + d;
+      }
+      if (d.length === 10 || d.length === 11) d = '55' + d;
+    }
+    if (d.indexOf('55') !== 0 || (d.length !== 12 && d.length !== 13)) {
+      return { ok: false, msg: d.length < 12 ? 'Faltam dígitos' : 'Dígitos demais' };
+    }
+    const area = d.slice(2, 4);
+    const local = d.slice(4);
+    if (!/^[1-9][1-9]$/.test(area)) return { ok: false, msg: 'DDD inválido' };
+    if (local.length === 9 && local.charAt(0) !== '9') return { ok: false, msg: 'Celular de 9 dígitos começa com 9' };
+    const display = '(' + area + ') ' + (local.length === 9 ? local.slice(0, 5) + '-' + local.slice(5) : local.slice(0, 4) + '-' + local.slice(4));
+    return { ok: true, digits: d, display: display, warn: local.length === 8 ? 'parece fixo; só serve se tiver WhatsApp' : '' };
+  }
+
+  /* ===================== sorteio ===================== */
+  function cycleMap(order) { const m = {}; for (let i = 0; i < order.length; i++) m[order[i]] = order[(i + 1) % order.length]; return m; }
+  function isOneCycle(map) {
+    const ids = Object.keys(map);
+    if (ids.length < 2) return false;
+    let cur = ids[0], steps = 0;
+    do { cur = map[cur]; steps++; } while (cur !== ids[0] && steps <= ids.length);
+    return cur === ids[0] && steps === ids.length;
+  }
+  function hamiltonCycle(ids, can, budget) {
+    const n = ids.length;
+    const start = ids[randBelow(n)];
+    const path = [start];
+    const used = {}; used[start] = true;
+    let steps = 0;
+    function dfs() {
+      if (++steps > budget) return false;
+      if (path.length === n) return can(path[n - 1], start);
+      const last = path[path.length - 1];
+      const cands = shuffle(ids.filter(x => !used[x] && can(last, x)));
+      for (let i = 0; i < cands.length; i++) {
+        const c = cands[i];
+        used[c] = true; path.push(c);
+        if (dfs()) return true;
+        path.pop(); used[c] = false;
+      }
+      return false;
+    }
+    return dfs() ? path.slice() : null;
+  }
+  function randomMatching(ids, can) {
+    const owner = {};
+    function tryAssign(a, seen) {
+      const opts = shuffle(ids.slice());
+      for (let i = 0; i < opts.length; i++) {
+        const b = opts[i];
+        if (!can(a, b) || seen[b]) continue;
+        seen[b] = true;
+        if (owner[b] === undefined || tryAssign(owner[b], seen)) { owner[b] = a; return true; }
+      }
+      return false;
+    }
+    const order = shuffle(ids.slice());
+    for (let i = 0; i < order.length; i++) if (!tryAssign(order[i], {})) return null;
+    const map = {};
+    for (const b in owner) map[owner[b]] = b;
+    return map;
+  }
+  function solveDraw(ids, forbidden, wantCycle) {
+    const n = ids.length;
+    if (n < 3) return { ok: false, reason: 'min' };
+    const can = (a, b) => a !== b && !forbidden.has(a + '>' + b);
+    for (let i = 0; i < n; i++) if (!ids.some(b => can(ids[i], b))) return { ok: false, reason: 'giver', who: ids[i] };
+    for (let i = 0; i < n; i++) if (!ids.some(a => can(a, ids[i]))) return { ok: false, reason: 'receiver', who: ids[i] };
+    if (wantCycle) {
+      for (let t = 0; t < 5000; t++) {
+        const order = shuffle(ids.slice());
+        let good = true;
+        for (let i = 0; i < n; i++) if (!can(order[i], order[(i + 1) % n])) { good = false; break; }
+        if (good) return { ok: true, map: cycleMap(order), cycle: true, fallback: false };
+      }
+      const order = hamiltonCycle(ids, can, 400000);
+      if (order) return { ok: true, map: cycleMap(order), cycle: true, fallback: false };
+    }
+    for (let t = 0; t < 5000; t++) {
+      const perm = shuffle(ids.slice());
+      let good = true;
+      for (let i = 0; i < n; i++) if (!can(ids[i], perm[i])) { good = false; break; }
+      if (good) {
+        const map = {};
+        for (let i = 0; i < n; i++) map[ids[i]] = perm[i];
+        return { ok: true, map: map, cycle: isOneCycle(map), fallback: wantCycle };
+      }
+    }
+    const m = randomMatching(ids, can);
+    if (m) return { ok: true, map: m, cycle: isOneCycle(m), fallback: wantCycle };
+    return { ok: false, reason: 'impossible' };
+  }
+
+  /* ===================== link secreto (token) ===================== */
+  const B62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  function keystream(n) {
+    let x = 0x2545F491;
+    const out = new Uint8Array(n);
+    for (let i = 0; i < n; i++) { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; out[i] = (x >>> 0) & 255; }
+    return out;
+  }
+  function check16(bytes) {
+    let a = 1, b = 0;
+    for (let i = 0; i < bytes.length; i++) { a = (a + bytes[i]) % 251; b = (b + a) % 251; }
+    return [a, b];
+  }
+  function toB62(bytes) {
+    let digits = [1];
+    for (let i = 0; i < bytes.length; i++) digits.push(bytes[i]);
+    let out = '';
+    while (digits.length) {
+      let rem = 0;
+      const q = [];
+      for (let i = 0; i < digits.length; i++) {
+        const acc = rem * 256 + digits[i];
+        const qd = Math.floor(acc / 62);
+        rem = acc % 62;
+        if (q.length || qd) q.push(qd);
+      }
+      out = B62[rem] + out;
+      digits = q;
+    }
+    return out;
+  }
+  function fromB62(str) {
+    const digits = [0];
+    for (let k = 0; k < str.length; k++) {
+      const v = B62.indexOf(str[k]);
+      if (v < 0) throw new Error('char');
+      let carry = v;
+      for (let i = digits.length - 1; i >= 0; i--) { const acc = digits[i] * 62 + carry; digits[i] = acc & 255; carry = acc >> 8; }
+      while (carry) { digits.unshift(carry & 255); carry >>= 8; }
+    }
+    while (digits.length > 1 && digits[0] === 0) digits.shift();
+    if (digits[0] !== 1) throw new Error('sentinel');
+    return new Uint8Array(digits.slice(1));
+  }
+  function encodeToken(p) {
+    const fields = [TOKEN_V, p.code || '', p.giver || '', p.receiver || '', p.wish || '', p.event || '', p.date || '', p.time || '', p.place || '', p.price || ''];
+    const body = new TextEncoder().encode(fields.map(f => String(f).split(SEP).join(' ')).join(SEP));
+    const c = check16(body);
+    const ks = keystream(body.length + 2);
+    const raw = new Uint8Array(body.length + 2);
+    raw[0] = c[0] ^ ks[0];
+    raw[1] = c[1] ^ ks[1];
+    for (let i = 0; i < body.length; i++) raw[i + 2] = body[i] ^ ks[i + 2];
+    return 'ax' + TOKEN_V + toB62(raw);
+  }
+  function decodeToken(tok) {
+    const m = /^ax1([0-9A-Za-z]+)$/.exec(String(tok || ''));
+    if (!m) return null;
+    try {
+      const raw = fromB62(m[1]);
+      if (raw.length < 3) return null;
+      const ks = keystream(raw.length);
+      const body = new Uint8Array(raw.length - 2);
+      for (let i = 2; i < raw.length; i++) body[i - 2] = raw[i] ^ ks[i];
+      const c = check16(body);
+      if ((raw[0] ^ ks[0]) !== c[0] || (raw[1] ^ ks[1]) !== c[1]) return null;
+      const f = new TextDecoder().decode(body).split(SEP);
+      if (f.length < 10 || f[0] !== TOKEN_V || !f[3]) return null;
+      return { code: f[1], giver: f[2], receiver: f[3], wish: f[4], event: f[5], date: f[6], time: f[7], place: f[8], price: f[9] };
+    } catch (e) { return null; }
+  }
+
+  /* ===================== mensagem ===================== */
+  function renderTpl(tpl, vars) {
+    const has = k => Object.prototype.hasOwnProperty.call(vars, k);
+    const out = [];
+    String(tpl).split('\n').forEach(line => {
+      const keys = (line.match(/\{([a-z_]+)\}/g) || []).map(k => k.slice(1, -1)).filter(has);
+      if (keys.some(k => !String(vars[k] || '').trim())) return;
+      out.push(line.replace(/\{([a-z_]+)\}/g, (all, k) => has(k) ? vars[k] : all));
+    });
+    return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+  function waHref(method, digits, text) {
+    const t = encodeURIComponent(text);
+    if (method === 'web') return 'https://web.whatsapp.com/send?phone=' + digits + '&text=' + t;
+    if (method === 'desktop') return 'whatsapp://send?phone=' + digits + '&text=' + t;
+    return 'https://wa.me/' + digits + '?text=' + t;
+  }
+  function parseList(text) {
+    const rows = [];
+    String(text || '').split(/\r?\n/).forEach(raw => {
+      const line = raw.trim();
+      if (!line) return;
+      const m = /(\+?\(?\d[\d\s().\-]{6,}\d)/.exec(line);
+      let name = line, phone = '', wish = '';
+      if (m) { name = line.slice(0, m.index); phone = m[1].trim(); wish = line.slice(m.index + m[0].length); }
+      name = name.replace(/^\s*\d{1,3}\s*[.)\-–—:]\s+(?=\D)/, '').replace(/^[\s,;:|\-–—]+|[\s,;:|\-–—]+$/g, '').trim();
+      wish = wish.replace(/^[\s,;:|\-–—]+|[\s,;:|]+$/g, '').trim();
+      if (!name && !phone) return;
+      rows.push({ name: name.slice(0, 60), phone: phone, wish: wish.slice(0, 80) });
+    });
+    return rows;
+  }
+
+  /* ===================== estado ===================== */
+  function blankState() {
+    return {
+      v: 1,
+      event: { name: 'Amigo X da SEMAM 2026', date: '', time: '', place: '', price: '', org: '' },
+      ddd: '27',
+      people: [],
+      rules: [],
+      singleCycle: true,
+      tpl: DEFAULT_TPL,
+      method: '',
+      revealBase: DEFAULT_BASE,
+      draw: null
+    };
+  }
+  function migrate(s) {
+    const out = blankState();
+    if (!s || typeof s !== 'object') return out;
+    if (s.event && typeof s.event === 'object') for (const k in out.event) if (typeof s.event[k] === 'string') out.event[k] = s.event[k];
+    if (typeof s.ddd === 'string') out.ddd = s.ddd;
+    if (Array.isArray(s.people)) {
+      const seen = {};
+      out.people = s.people.filter(p => p && typeof p.id === 'string' && !seen[p.id] && (seen[p.id] = true))
+        .map(p => ({ id: p.id, name: String(p.name || ''), phone: String(p.phone || ''), wish: String(p.wish || '') }));
+    }
+    const ids = {};
+    out.people.forEach(p => { ids[p.id] = true; });
+    if (Array.isArray(s.rules)) out.rules = s.rules.filter(r => r && ids[r.a] && ids[r.b] && r.a !== r.b)
+      .map(r => ({ id: String(r.id || makeCode(6)), a: r.a, b: r.b, both: !!r.both }));
+    if (typeof s.singleCycle === 'boolean') out.singleCycle = s.singleCycle;
+    if (typeof s.tpl === 'string' && s.tpl.trim()) out.tpl = s.tpl;
+    if (typeof s.method === 'string') out.method = s.method;
+    if (typeof s.revealBase === 'string' && /^https?:\/\//.test(s.revealBase.trim())) out.revealBase = s.revealBase.trim();
+    const d = s.draw;
+    if (d && typeof d === 'object' && d.map && typeof d.code === 'string' && out.people.length >= 3) {
+      const map = {};
+      const recv = {};
+      let valid = Object.keys(d.map).length === out.people.length;
+      out.people.forEach(p => {
+        const r = d.map[p.id];
+        if (!ids[r] || r === p.id || recv[r]) valid = false;
+        recv[r] = true;
+        map[p.id] = r;
+      });
+      if (valid) {
+        const sent = {};
+        if (d.sent && typeof d.sent === 'object') for (const k in d.sent) if (ids[k]) sent[k] = (d.sent[k] && typeof d.sent[k] === 'object') ? d.sent[k] : { at: Number(d.sent[k]) || Date.now(), how: 'manual' };
+        out.draw = { code: d.code, at: Number(d.at) || Date.now(), map: map, cycle: !!d.cycle, fallback: !!d.fallback, sent: sent };
+      }
+    }
+    return out;
+  }
+  function load() {
+    try { const raw = localStorage.getItem(STORE_KEY); return raw ? migrate(JSON.parse(raw)) : null; } catch (e) { return null; }
+  }
+  let state = load() || blankState();
+  let saveTimer = null;
+  function saveNow() { clearTimeout(saveTimer); try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* sem armazenamento: segue em memória */ } }
+  function save() { clearTimeout(saveTimer); saveTimer = setTimeout(saveNow, 200); }
+
+  const personById = id => state.people.find(p => p.id === id);
+  const nameOf = id => { const p = personById(id); return p ? p.name.trim() : '?'; };
+  const isBlankRow = p => !p.name.trim() && !p.phone.trim() && !p.wish.trim();
+  function forbiddenSet() {
+    const f = new Set();
+    state.rules.forEach(r => { f.add(r.a + '>' + r.b); if (r.both) f.add(r.b + '>' + r.a); });
+    return f;
+  }
+  function effectiveBase() {
+    const b = HOSTED ? location.origin + location.pathname : (state.revealBase || DEFAULT_BASE);
+    return b.split('#')[0];
+  }
+  const revealUrl = tok => effectiveBase() + '#' + tok;
+  function currentMethods() {
+    const list = [];
+    if (IS_MOBILE) list.push({ v: 'app', t: 'App do WhatsApp (neste aparelho)' });
+    list.push({ v: 'web', t: 'WhatsApp Web (navegador)' });
+    if (!IS_MOBILE) list.push({ v: 'app', t: 'Link wa.me (escolhe entre app e web)' });
+    if (IS_FILE) list.push({ v: 'desktop', t: 'WhatsApp instalado no computador' });
+    return list;
+  }
+  function currentMethod() {
+    const ok = currentMethods().map(o => o.v);
+    return ok.indexOf(state.method) >= 0 ? state.method : ok[0];
+  }
+
+  function eventPayload() {
+    const ev = state.event;
+    return { event: ev.name.trim(), date: ev.date, time: ev.time, place: ev.place.trim(), price: ev.price.trim() };
+  }
+  function tokenFor(giverId) {
+    const d = state.draw;
+    const g = personById(giverId), r = personById(d.map[giverId]);
+    return encodeToken(Object.assign({ code: d.code, giver: g.name.trim(), receiver: r.name.trim(), wish: r.wish.trim() }, eventPayload()));
+  }
+  function demoData() {
+    const p0 = state.people.find(p => p.name.trim());
+    return Object.assign({ code: state.draw ? state.draw.code : 'TESTE', giver: p0 ? p0.name.trim() : 'Ana Paula', receiver: 'Exemplo da Silva', wish: 'chocolate amargo ou um livro' }, eventPayload());
+  }
+  function messageFor(p, link) {
+    const ev = state.event;
+    return renderTpl(state.tpl, {
+      nome: p.name.trim(),
+      primeiro_nome: firstName(p.name),
+      link: link,
+      evento: ev.name.trim(),
+      data: fmtWhen(ev.date, ev.time),
+      local: ev.place.trim(),
+      valor: ev.price.trim(),
+      organizador: ev.org.trim(),
+      codigo: state.draw ? state.draw.code : ''
+    });
+  }
+  function sendHref(p) {
+    const ph = normalizePhone(p.phone, state.ddd);
+    return waHref(currentMethod(), ph.digits, messageFor(p, revealUrl(tokenFor(p.id))));
+  }
+  function phoneDisplay(p) { const ph = normalizePhone(p.phone, state.ddd); return ph.ok ? ph.display : p.phone; }
+  function sendQueue(onlyPending) {
+    if (!state.draw) return [];
+    return state.people.filter(p => !onlyPending || !state.draw.sent[p.id]).map(p => ({
+      id: p.id, nome: p.name.trim(), telefone: normalizePhone(p.phone, state.ddd).digits, mensagem: messageFor(p, revealUrl(tokenFor(p.id)))
+    }));
+  }
+  function queueJson() {
+    const ev = state.event;
+    return JSON.stringify({ app: 'amigox', v: 1, sorteio: state.draw ? state.draw.code : null, evento: ev.name.trim(), geradoEm: new Date().toISOString(), mensagens: sendQueue(false).map(m => Object.assign({ status: state.draw.sent[m.id] ? 'enviada' : 'pendente' }, m)) }, null, 2);
+  }
+
+  /* ===================== validação ===================== */
+  function phoneMap() {
+    const m = {};
+    state.people.forEach(p => { const ph = normalizePhone(p.phone, state.ddd); if (ph.ok) (m[ph.digits] = m[ph.digits] || []).push(p); });
+    return m;
+  }
+  function phoneStatus(p, pm) {
+    if (!p.phone.trim()) return p.name.trim() ? { cls: 'bad', text: 'Falta o WhatsApp' } : { cls: '', text: '' };
+    const ph = normalizePhone(p.phone, state.ddd);
+    if (!ph.ok) return { cls: 'bad', text: ph.msg };
+    const same = (pm[ph.digits] || []).filter(o => o.id !== p.id);
+    if (same.length) return { cls: 'warn', text: ph.display + ' · mesmo número de ' + (same[0].name.trim() || 'outra linha') };
+    if (ph.warn) return { cls: 'warn', text: ph.display + ' · ' + ph.warn };
+    return { cls: 'ok', text: '✓ ' + ph.display };
+  }
+  function validate() {
+    const items = [];
+    let blocking = 0;
+    const add = (kind, text) => { items.push({ kind: kind, text: text }); if (kind === 'bad') blocking++; };
+    const people = state.people.filter(p => !isBlankRow(p));
+    const n = people.length;
+    if (n < 3) add('bad', 'Cadastre pelo menos 3 pessoas (agora: ' + n + ').');
+    else add('ok', n + ' pessoas na lista.');
+    const noName = people.filter(p => !p.name.trim()).length;
+    if (noName) add('bad', noName === 1 ? 'Uma linha está sem nome.' : noName + ' linhas estão sem nome.');
+    const seen = {}, dups = [];
+    people.forEach(p => { const k = normName(p.name); if (!k) return; if (seen[k] && dups.indexOf(p.name.trim()) < 0) dups.push(p.name.trim()); seen[k] = true; });
+    if (dups.length) add('bad', 'Nome repetido: ' + dups.join(', ') + '. Diferencie com sobrenome ou inicial.');
+    const badPhones = people.filter(p => !normalizePhone(p.phone, state.ddd).ok);
+    if (badPhones.length) add('bad', (badPhones.length === 1 ? 'Um número para conferir: ' : badPhones.length + ' números para conferir: ') + badPhones.map(p => p.name.trim() || 'sem nome').join(', ') + '.');
+    const pm = phoneMap();
+    Object.keys(pm).forEach(k => { if (pm[k].length > 1) add('warn', pm[k].map(p => p.name.trim()).join(' e ') + ' têm o mesmo número: quem abrir verá o papelzinho do outro.'); });
+    const fixed = people.filter(p => { const ph = normalizePhone(p.phone, state.ddd); return ph.ok && ph.warn; });
+    if (fixed.length) add('warn', 'Confira se tem WhatsApp: ' + fixed.map(p => p.name.trim()).join(', ') + '.');
+    if (state.tpl.indexOf('{link}') < 0) add('bad', 'A mensagem precisa ter o campo {link}; sem ele ninguém recebe o papelzinho.');
+    else add('ok', 'Mensagem com o link secreto.');
+    if (!HOSTED && !/^https?:\/\/[^\s]+$/.test(state.revealBase)) add('bad', 'Endereço da página de revelação inválido (veja Backup e endereço).');
+    const rulesTxt = state.rules.length ? state.rules.length + (state.rules.length === 1 ? ' regra' : ' regras') + ' de quem não tira quem.' : 'Sem regras de quem não tira quem.';
+    add('ok', (state.singleCycle ? 'Roda única ligada. ' : 'Sorteio livre. ') + rulesTxt);
+    return { items: items, blocking: blocking };
+  }
+
+  /* ===================== renderização: organizador ===================== */
+  function renderEvent() {
+    $('#evName').value = state.event.name;
+    $('#evPlace').value = state.event.place;
+    $('#evDate').value = state.event.date;
+    $('#evTime').value = state.event.time;
+    $('#evPrice').value = state.event.price;
+    $('#evOrg').value = state.event.org;
+    $('#ddd').value = state.ddd;
+    $('#tpl').value = state.tpl;
+    $('#singleCycle').checked = state.singleCycle;
+    $('#revealBase').value = state.revealBase;
+    $('#baseEdit').hidden = HOSTED;
+    $('#baseAuto').hidden = !HOSTED;
+    if (HOSTED) $('#baseAuto').textContent = 'Os links apontam para este mesmo endereço: ' + effectiveBase();
+  }
+  function personRow(p, i, locked, pm) {
+    const st = phoneStatus(p, pm);
+    return h('div', { class: 'prow', 'data-id': p.id },
+      h('span', { class: 'idx', text: String(i + 1) }),
+      h('label', { class: 'c-name' }, h('span', { class: 'sr', text: 'Nome' }),
+        h('input', { id: 'nm-' + p.id, class: 'in-name', type: 'text', value: p.name, placeholder: 'Nome', maxlength: '60', autocomplete: 'off', disabled: locked })),
+      h('div', { class: 'c-phone' },
+        h('label', null, h('span', { class: 'sr', text: 'WhatsApp' }),
+          h('input', { id: 'ph-' + p.id, class: 'in-phone', type: 'tel', inputmode: 'tel', value: p.phone, placeholder: '(27) 9xxxx-xxxx', autocomplete: 'off', disabled: locked })),
+        h('span', { class: 'pstate ' + st.cls, id: 'st-' + p.id, text: st.text })),
+      h('label', { class: 'c-wish' }, h('span', { class: 'sr', text: 'Sugestão de presente' }),
+        h('input', { id: 'ws-' + p.id, class: 'in-wish', type: 'text', value: p.wish, placeholder: 'Sugestão (opcional)', maxlength: '80', autocomplete: 'off', disabled: locked })),
+      h('button', { class: 'iconbtn rm', type: 'button', 'aria-label': 'Remover ' + (p.name.trim() || 'linha ' + (i + 1)), title: 'Remover', disabled: locked, text: '✕' })
+    );
+  }
+  function renderPeople() {
+    const list = $('#people');
+    list.textContent = '';
+    const locked = !!state.draw;
+    const pm = phoneMap();
+    state.people.forEach((p, i) => list.appendChild(personRow(p, i, locked, pm)));
+    const empty = state.people.length === 0;
+    $('#peopleEmpty').hidden = !empty;
+    $('#peopleHead').hidden = empty;
+    $('#peopleActions').hidden = locked;
+    $('#peopleLocked').hidden = !locked;
+    if (locked) setPaste(false);
+    else if (empty && !pasteTouched) setPaste(true);
+  }
+  function updateStatuses() {
+    const pm = phoneMap();
+    state.people.forEach(p => {
+      const el = document.getElementById('st-' + p.id);
+      if (!el) return;
+      const st = phoneStatus(p, pm);
+      el.className = 'pstate ' + st.cls;
+      el.textContent = st.text;
+    });
+  }
+  let pasteTouched = false;
+  function setPaste(open) {
+    $('#pasteBox').hidden = !open;
+    $('#togglePaste').setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('#togglePaste').textContent = open ? 'Fechar a colagem' : 'Colar uma lista';
+  }
+  function renderRules() {
+    const locked = !!state.draw;
+    const named = state.people.filter(p => p.name.trim());
+    ['#ruleA', '#ruleB'].forEach((sel, idx) => {
+      const s = $(sel);
+      const prev = s.value;
+      s.textContent = '';
+      s.appendChild(h('option', { value: '', text: idx === 0 ? 'Escolha alguém' : 'Escolha quem' }));
+      named.forEach(p => s.appendChild(h('option', { value: p.id, text: p.name.trim() })));
+      s.value = named.some(p => p.id === prev) ? prev : '';
+      s.disabled = locked || named.length < 2;
+    });
+    $('#ruleBoth').disabled = locked;
+    $('#addRule').disabled = locked || named.length < 2;
+    $('#singleCycle').disabled = locked;
+    const ul = $('#rules');
+    ul.textContent = '';
+    state.rules.forEach(r => {
+      const txt = r.both ? [h('b', { text: nameOf(r.a) }), ' e ', h('b', { text: nameOf(r.b) }), ' não se tiram'] : [h('b', { text: nameOf(r.a) }), ' não pode tirar ', h('b', { text: nameOf(r.b) })];
+      const span = h('span', null, h('span', { class: 'x', 'aria-hidden': 'true', text: '✕' }), ' ');
+      txt.forEach(t => span.appendChild(typeof t === 'string' ? document.createTextNode(t) : t));
+      ul.appendChild(h('li', null, span, h('button', { class: 'btn ghost sm rm-rule', type: 'button', 'data-id': r.id, disabled: locked, text: 'Remover' })));
+    });
+  }
+  function waFormat(text) {
+    const esc = text.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    return esc
+      .replace(/(https?:\/\/[^\s<]+)/g, '<span class="lnk">$1</span>')
+      .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,!?:;]|$)/gm, '$1<b>$2</b>')
+      .replace(/(^|[\s(])_([^_\n]+)_(?=[\s).,!?:;]|$)/gm, '$1<i>$2</i>');
+  }
+  function renderPreview() {
+    const p = state.people.find(x => x.name.trim()) || { id: '', name: 'Ana Paula', phone: '', wish: '' };
+    const link = revealUrl(encodeToken(Object.assign({}, demoData(), { giver: p.name.trim(), receiver: 'Exemplo da Silva' })));
+    const msg = messageFor(p, link);
+    $('#bubble').innerHTML = waFormat(msg) + '<span class="tm">' + fmtTime(Date.now()) + '</span>';
+    $('#testLink').href = revealUrl(encodeToken(demoData()));
+  }
+  function renderChecks() {
+    const v = validate();
+    const ul = $('#checks');
+    ul.textContent = '';
+    v.items.forEach(it => ul.appendChild(h('li', { class: it.kind },
+      h('span', { class: 'ic', 'aria-hidden': 'true', text: it.kind === 'ok' ? '✓' : it.kind === 'bad' ? '✕' : '!' }),
+      h('span', { text: it.text }))));
+    $('#drawBtn').disabled = v.blocking > 0;
+    return v;
+  }
+  function renderChip() {
+    const c = $('#statusChip');
+    const n = state.people.filter(p => !isBlankRow(p)).length;
+    if (state.draw) {
+      const sent = state.people.filter(p => state.draw.sent[p.id]).length;
+      c.className = 'chip' + (sent === n ? ' ok' : '');
+      c.textContent = 'Sorteio #' + state.draw.code + ' · ' + sent + ' de ' + n + ' enviadas';
+      return;
+    }
+    if (!n) { c.className = 'chip warn'; c.textContent = 'Comece pela lista'; return; }
+    const v = validate();
+    if (v.blocking) { c.className = 'chip warn'; c.textContent = n + (n === 1 ? ' pessoa' : ' pessoas') + ' · ' + v.blocking + (v.blocking === 1 ? ' pendência' : ' pendências'); return; }
+    c.className = 'chip';
+    c.textContent = n + ' pessoas · pronto para sortear';
+  }
+  function setTarget(a) {
+    if (currentMethod() === 'desktop') a.removeAttribute('target');
+    else a.setAttribute('target', 'amigox-whatsapp');
+  }
+  function sentLabel(s) {
+    if (!s) return 'Pendente';
+    return (s.how === 'auto' ? 'Enviada ' : s.how === 'script' ? 'Enviada (script) ' : 'Aberta ') + 'às ' + fmtTime(s.at);
+  }
+  function renderSend() {
+    const d = state.draw;
+    $('#preDraw').hidden = !!d;
+    $('#postDraw').hidden = !d;
+    $('#sendHint').textContent = d ? 'Um clique por pessoa: o WhatsApp abre com a mensagem pronta e você aperta Enviar. Ou use o envio automático.' : 'Confira os itens abaixo e sorteie. Depois do sorteio, a lista trava.';
+    if (!d) return;
+    $('#drawCode').textContent = d.code;
+    $('#drawWhen').textContent = 'feito em ' + fmtDateTime(d.at);
+    $('#drawMode').textContent = d.cycle
+      ? 'Roda única: na revelação, quem recebe o presente revela em seguida, até fechar a roda.'
+      : (d.fallback ? 'Com essas regras não coube numa roda só. O sorteio saiu em rodas menores; ninguém tira a si mesmo.' : 'Sorteio livre: pode haver dupla que se tira.');
+    const sel = $('#method');
+    sel.textContent = '';
+    currentMethods().forEach(o => sel.appendChild(h('option', { value: o.v, text: o.t })));
+    sel.value = currentMethod();
+    const n = state.people.length;
+    const sent = state.people.filter(p => d.sent[p.id]).length;
+    $('#progBar').style.width = (n ? Math.round(sent / n * 100) : 0) + '%';
+    $('#progText').textContent = sent === n
+      ? 'As ' + n + ' mensagens foram enviadas ou abertas no WhatsApp.'
+      : sent + ' de ' + n + ' mensagens enviadas.';
+    const next = state.people.find(p => !d.sent[p.id]);
+    const nb = $('#nextBtn');
+    if (next) {
+      nb.href = sendHref(next);
+      nb.setAttribute('data-id', next.id);
+      setTarget(nb);
+      nb.removeAttribute('aria-disabled');
+      $('#nextLabel').textContent = 'Abrir WhatsApp de ' + next.name.trim();
+      $('#nextSub').textContent = phoneDisplay(next) + ' · faltam ' + (n - sent);
+    } else {
+      nb.removeAttribute('href');
+      nb.removeAttribute('data-id');
+      nb.setAttribute('aria-disabled', 'true');
+      $('#nextLabel').textContent = 'Todo mundo já recebeu o link';
+      $('#nextSub').textContent = 'Para reenviar, use Abrir de novo na lista abaixo.';
+    }
+    const list = $('#sendList');
+    list.textContent = '';
+    state.people.forEach(p => {
+      const s = d.sent[p.id];
+      const a = h('a', { class: 'btn sm send-one', href: sendHref(p), 'data-id': p.id, rel: 'noopener', text: s ? 'Abrir de novo' : 'Abrir no WhatsApp' });
+      setTarget(a);
+      list.appendChild(h('div', { class: 'srow' },
+        h('div', { class: 'who' }, h('b', { text: p.name.trim() }), h('small', { text: phoneDisplay(p) })),
+        h('span', { class: 'status' + (s ? (s.how === 'manual' ? ' done' : ' done auto') : ''), text: sentLabel(s) }),
+        h('div', { class: 'acts' }, a, h('button', { class: 'btn sm copy-one', type: 'button', 'data-id': p.id, text: 'Copiar texto' }))));
+    });
+  }
+  function renderLockedInputs() { $('#doImport').disabled = !!state.draw; }
+  function renderAll() {
+    renderEvent();
+    renderPeople();
+    renderRules();
+    renderPreview();
+    renderChecks();
+    renderSend();
+    renderChip();
+    renderLockedInputs();
+  }
+  function refreshLight() { renderChecks(); renderChip(); renderPreview(); }
+
+  /* ===================== interações: organizador ===================== */
+  function addPerson(focus) {
+    const p = { id: 'p' + makeCode(8), name: '', phone: '', wish: '' };
+    state.people.push(p);
+    save();
+    renderPeople(); renderRules(); refreshLight();
+    if (focus) { const el = document.getElementById('nm-' + p.id); if (el) el.focus(); }
+  }
+  function removePerson(id) {
+    const p = personById(id);
+    state.people = state.people.filter(x => x.id !== id);
+    state.rules = state.rules.filter(r => r.a !== id && r.b !== id);
+    save();
+    renderPeople(); renderRules(); refreshLight();
+    if (p && p.name.trim()) toast(p.name.trim() + ' saiu da lista.');
+  }
+  function doImport() {
+    const rows = parseList($('#pasteText').value);
+    if (!rows.length) { $('#importMsg').textContent = 'Nada para adicionar.'; return; }
+    const existing = {};
+    state.people.forEach(p => { existing[normName(p.name)] = true; });
+    let added = 0, skipped = 0;
+    state.people = state.people.filter(p => !isBlankRow(p));
+    rows.forEach(r => {
+      const k = normName(r.name);
+      if (k && existing[k]) { skipped++; return; }
+      existing[k] = true;
+      state.people.push({ id: 'p' + makeCode(8), name: r.name, phone: r.phone, wish: r.wish });
+      added++;
+    });
+    save();
+    $('#pasteText').value = '';
+    pasteTouched = true;
+    setPaste(false);
+    renderPeople(); renderRules(); refreshLight();
+    toast(added + (added === 1 ? ' pessoa adicionada' : ' pessoas adicionadas') + (skipped ? '; ' + skipped + ' já estavam na lista.' : '.'));
+    $('#importMsg').textContent = '';
+  }
+  let shuffleTimer = null;
+  function doDraw() {
+    state.people = state.people.filter(p => !isBlankRow(p));
+    const v = renderChecks();
+    if (v.blocking) { renderPeople(); toast('Resolva os itens marcados com ✕ antes de sortear.', 'bad'); return; }
+    const ids = state.people.map(p => p.id);
+    const res = solveDraw(ids, forbiddenSet(), state.singleCycle);
+    if (!res.ok) {
+      let msg = 'As regras deixam o sorteio impossível.';
+      if (res.reason === 'giver') msg = nameOf(res.who) + ' não pode tirar ninguém com essas regras.';
+      if (res.reason === 'receiver') msg = 'Ninguém pode tirar ' + nameOf(res.who) + ' com essas regras.';
+      openModal({ title: 'Não deu para sortear', text: msg + ' Apague alguma regra no passo 3 e sorteie de novo.', actions: [{ label: 'Entendi', kind: 'primary' }] });
+      return;
+    }
+    state.draw = { code: makeCode(4), at: Date.now(), map: res.map, cycle: res.cycle, fallback: !!res.fallback, sent: {} };
+    saveNow();
+    renderChip();
+    showDrawAnimation();
+  }
+  function showDrawAnimation() {
+    const d = state.draw;
+    const names = state.people.map(p => firstName(p.name));
+    const papers = Array.prototype.slice.call(document.querySelectorAll('#hat .paper'));
+    const modal = $('#drawModal');
+    const hat = $('#hat');
+    $('#drawResult').hidden = true;
+    $('#drawStatus').hidden = false;
+    $('#drawStatus').textContent = 'Embaralhando os papelzinhos…';
+    hat.classList.add('shuffling');
+    hat.hidden = false;
+    modal.hidden = false;
+    lastFocus = document.activeElement;
+    const finish = () => {
+      clearInterval(shuffleTimer);
+      hat.classList.remove('shuffling');
+      hat.hidden = true;
+      $('#drawStatus').hidden = true;
+      $('#drawResultTitle').textContent = 'Sorteio #' + d.code + ' feito';
+      $('#drawResultText').textContent = state.people.length + ' papelzinhos dobrados. ' + (d.cycle ? 'Roda única fechada.' : 'Ninguém tira a si mesmo.') + ' Os pares ficam escondidos: cada pessoa descobre só o seu.';
+      $('#drawResult').hidden = false;
+      $('#drawGo').focus();
+    };
+    if (REDUCED) { finish(); return; }
+    let tick = 0;
+    shuffleTimer = setInterval(() => {
+      papers.forEach(pp => { pp.textContent = names[Math.floor(Math.random() * names.length)] || ''; });
+      if (++tick === 12) $('#drawStatus').textContent = 'Fechando a roda…';
+    }, 110);
+    setTimeout(finish, 2400);
+  }
+  function closeDrawModal() {
+    clearInterval(shuffleTimer);
+    $('#drawModal').hidden = true;
+    renderAll();
+    const sec = $('#s-envio');
+    if (sec.scrollIntoView) sec.scrollIntoView({ block: 'start', behavior: REDUCED ? 'auto' : 'smooth' });
+    toast('Sorteio #' + (state.draw ? state.draw.code : '') + ' feito. Os pares ficam escondidos.');
+  }
+  function markSent(id, how) {
+    if (!state.draw || !personById(id)) return false;
+    state.draw.sent[id] = { at: Date.now(), how: how || 'manual' };
+    saveNow();
+    renderSend(); renderChip();
+    return true;
+  }
+  function onSendActivate(e) {
+    const a = e.target.closest ? e.target.closest('a.send-one, a#nextBtn') : null;
+    if (!a) return;
+    if (a.getAttribute('aria-disabled') === 'true' || !a.getAttribute('href')) { e.preventDefault(); return; }
+    const id = a.getAttribute('data-id');
+    setTimeout(() => markSent(id, 'manual'), 80);
+  }
+  function backupJson() { return JSON.stringify({ app: 'amigox', v: 1, savedAt: new Date().toISOString(), state: state }, null, 2); }
+  function parseBackup(text) {
+    try { const o = JSON.parse(text); return o && o.app === 'amigox' && o.state ? migrate(o.state) : null; } catch (e) { return null; }
+  }
+  function copyText(text, label) {
+    const fallback = () => {
+      const ta = h('textarea', { readonly: true, 'aria-label': 'Texto para copiar' });
+      ta.value = text;
+      openModal({ title: 'Copie o texto', text: 'O navegador não deixou copiar sozinho. Selecione e copie (Ctrl+C ou toque longo).', node: ta, actions: [{ label: 'Fechar', kind: 'primary' }] });
+      setTimeout(() => { ta.focus(); ta.select(); }, 30);
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => toast(label || 'Copiado.'), fallback);
+        return;
+      }
+    } catch (e) { /* cai no modo manual */ }
+    fallback();
+  }
+  async function downloadText(name, data, okLabel) {
+    if (EMBEDDED && window.claude && typeof window.claude.use === 'function') {
+      try {
+        const dl = await window.claude.use('downloads');
+        if (dl) { await dl.save({ filename: name, data: data }); toast(okLabel); return; }
+      } catch (e) {
+        if (e && e.code === 'declined') { toast('Download cancelado.'); return; }
+      }
+      copyText(data, 'Copiado. Cole num arquivo de texto e guarde.');
+      return;
+    }
+    try {
+      const url = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
+      const a = h('a', { href: url, download: name });
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 800);
+      toast(okLabel + ': ' + name);
+    } catch (e) {
+      copyText(data, 'Copiado. Cole num arquivo de texto e guarde.');
+    }
+  }
+
+  /* ===================== modal e aviso ===================== */
+  let lastFocus = null;
+  function openModal(o) {
+    const box = $('#modalBox');
+    box.textContent = '';
+    box.appendChild(h('h3', { id: 'modalTitle', text: o.title }));
+    if (o.text) box.appendChild(h('p', { text: o.text }));
+    if (o.node) box.appendChild(o.node);
+    const acts = h('div', { class: 'row-actions' });
+    (o.actions || [{ label: 'Fechar' }]).forEach(a => {
+      const b = h('button', { class: 'btn ' + (a.kind || ''), type: 'button', text: a.label });
+      b.addEventListener('click', () => { if (!a.keepOpen) closeModal(); if (a.run) a.run(); });
+      acts.appendChild(b);
+    });
+    box.appendChild(acts);
+    lastFocus = document.activeElement;
+    $('#modal').hidden = false;
+    const first = box.querySelector('textarea, input, .btn');
+    if (first) first.focus();
+  }
+  function closeModal() {
+    $('#modal').hidden = true;
+    if (lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+  }
+  let toastTimer = null;
+  function toast(msg, kind) {
+    const t = $('#toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (kind ? ' ' + kind : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.className = 'toast'; }, 3600);
+  }
+
+  /* ===================== revelação ===================== */
+  function setText(id, v) { document.getElementById(id).textContent = v; }
+  function showReveal(data, opts) {
+    document.body.classList.add('in-reveal');
+    $('#organizer').hidden = true;
+    $('#reveal').hidden = false;
+    $('#rvDemo').hidden = !(opts && opts.demo);
+    $('#rvOk').hidden = !data;
+    $('#rvBad').hidden = !!data;
+    startLeaves();
+    if (!data) { document.title = 'Papelzinho rasgado · Amigo X'; return; }
+    document.title = 'Seu papelzinho · ' + (data.event || 'Amigo X');
+    setText('rvEvent', data.event || 'Amigo X');
+    setText('rvHello', 'Olá, ' + (firstName(data.giver) || 'tudo bem') + '!');
+    setText('rvLede', 'Seu papelzinho' + (data.code ? ' do sorteio #' + data.code : '') + ' chegou. Se você não é ' + (data.giver || 'a pessoa deste link') + ', feche sem abrir.');
+    setText('rvFor', data.giver ? 'para ' + data.giver : '');
+    setText('rvName', data.receiver);
+    const wish = $('#rvWish');
+    wish.textContent = '';
+    if (data.wish) { wish.appendChild(h('span', { text: 'Sugestão de presente: ' })); wish.appendChild(h('b', { text: data.wish })); }
+    wish.hidden = !data.wish;
+    const when = fmtWhen(data.date, data.time);
+    setText('rvWhen', when); $('#rvWhenBox').hidden = !when;
+    setText('rvWhere', data.place || ''); $('#rvWhereBox').hidden = !data.place;
+    setText('rvPrice', data.price || ''); $('#rvPriceBox').hidden = !data.price;
+    $('#rvDetails').hidden = !when && !data.place && !data.price;
+    setText('rvFine', (data.code ? 'Sorteio #' + data.code + ' · ' : '') + 'Este link é só seu. Não encaminhe.');
+    foldSlip();
+  }
+  function foldSlip() {
+    const s = $('#slip');
+    s.classList.remove('is-open');
+    s.setAttribute('aria-expanded', 'false');
+    $('#rvAfter').hidden = true;
+  }
+  function openSlip() {
+    const s = $('#slip');
+    if (s.classList.contains('is-open')) return;
+    s.classList.add('is-open');
+    s.setAttribute('aria-expanded', 'true');
+    $('#rvAfter').hidden = false;
+    setTimeout(() => { const n = $('#rvName'); if (n && n.focus) n.focus({ preventScroll: true }); }, 450);
+    confetti();
+  }
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function confetti() {
+    try {
+      if (REDUCED) return;
+      const rect = $('#slip').getBoundingClientRect();
+      const W = window.innerWidth, H = window.innerHeight;
+      const c = h('canvas', { class: 'confetti', 'aria-hidden': 'true' });
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      c.width = W * dpr; c.height = H * dpr; c.style.width = W + 'px'; c.style.height = H + 'px';
+      document.body.appendChild(c);
+      const ctx = c.getContext('2d');
+      ctx.scale(dpr, dpr);
+      const colors = ['--gold', '--slip', '--leaf-2', '--blue', '--leaf-1'].map(cssVar).filter(Boolean);
+      const ox = rect.left + rect.width / 2, oy = rect.top + rect.height * 0.3;
+      const parts = [];
+      for (let i = 0; i < 120; i++) parts.push({ x: ox + (Math.random() - 0.5) * rect.width * 0.6, y: oy, vx: (Math.random() - 0.5) * 11, vy: -Math.random() * 11 - 4, w: 5 + Math.random() * 6, h: 8 + Math.random() * 9, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.35, c: colors[i % colors.length] });
+      const t0 = performance.now();
+      const frame = t => {
+        const age = t - t0;
+        ctx.clearRect(0, 0, W, H);
+        ctx.globalAlpha = Math.max(0, 1 - age / 2400);
+        parts.forEach(p => {
+          p.vy += 0.3; p.vx *= 0.985; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+        });
+        if (age < 2400) requestAnimationFrame(frame); else c.remove();
+      };
+      requestAnimationFrame(frame);
+    } catch (e) { /* sem confete, sem problema */ }
+  }
+  /* folhas à deriva no fundo da revelação */
+  let leavesOn = false;
+  function startLeaves() {
+    if (leavesOn) return;
+    leavesOn = true;
+    try {
+      const c = $('#leaves');
+      const ctx = c.getContext('2d');
+      let W = 0, H = 0, dpr = 1, leaves = [];
+      const palette = () => ['--leaf-1', '--leaf-2', '--leaf-3', '--leaf-4'].map(cssVar);
+      let colors = palette();
+      function resize() {
+        dpr = Math.min(2, window.devicePixelRatio || 1);
+        W = window.innerWidth; H = window.innerHeight;
+        c.width = W * dpr; c.height = H * dpr; c.style.width = W + 'px'; c.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const n = Math.max(10, Math.min(22, Math.round(W * H / 42000)));
+        while (leaves.length < n) leaves.push(makeLeaf(true));
+        leaves.length = n;
+      }
+      function makeLeaf(anywhere) {
+        const s = 9 + Math.random() * 14;
+        return { x: Math.random() * W, y: anywhere ? Math.random() * H : -s * 2, s: s, vy: 0.25 + Math.random() * 0.45, ph: Math.random() * 6.28, amp: 0.3 + Math.random() * 0.6, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.012, c: colors[Math.floor(Math.random() * colors.length)], a: 0.22 + Math.random() * 0.3 };
+      }
+      function drawLeaf(l) {
+        ctx.save();
+        ctx.translate(l.x, l.y);
+        ctx.rotate(l.r);
+        ctx.globalAlpha = l.a;
+        ctx.fillStyle = l.c;
+        const s = l.s;
+        ctx.beginPath();
+        ctx.moveTo(0, -s);
+        ctx.bezierCurveTo(s * 0.95, -s * 0.55, s * 0.95, s * 0.55, 0, s);
+        ctx.bezierCurveTo(-s * 0.95, s * 0.55, -s * 0.95, -s * 0.55, 0, -s);
+        ctx.fill();
+        ctx.globalAlpha = l.a * 0.6;
+        ctx.strokeStyle = cssVar('--field');
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, -s * 0.8); ctx.lineTo(0, s * 0.8); ctx.stroke();
+        ctx.restore();
+      }
+      function frame(t) {
+        if (document.hidden || $('#reveal').hidden) { requestAnimationFrame(frame); return; }
+        ctx.clearRect(0, 0, W, H);
+        leaves.forEach((l, i) => {
+          l.y += l.vy; l.x += Math.sin(t / 1400 + l.ph) * l.amp; l.r += l.vr;
+          if (l.y > H + l.s * 2) leaves[i] = makeLeaf(false);
+          drawLeaf(l);
+        });
+        requestAnimationFrame(frame);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+      if (window.matchMedia) {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        const upd = () => { colors = palette(); };
+        if (mq.addEventListener) mq.addEventListener('change', upd);
+      }
+      if (REDUCED) { ctx.clearRect(0, 0, W, H); leaves.forEach(drawLeaf); return; }
+      requestAnimationFrame(frame);
+    } catch (e) { /* sem folhas, sem problema */ }
+  }
+
+  let organizerReady = false;
+  function showOrganizer() {
+    document.body.classList.remove('in-reveal');
+    $('#reveal').hidden = true;
+    $('#organizer').hidden = false;
+    document.title = 'Amigo X da SEMAM';
+    if (!organizerReady) { organizerReady = true; bindOrganizer(); }
+    renderAll();
+  }
+  function route() {
+    let hash = '';
+    try { hash = decodeURIComponent((location.hash || '').slice(1)); } catch (e) { hash = (location.hash || '').slice(1); }
+    if (/^ax\d/.test(hash)) { showReveal(decodeToken(hash), { demo: false }); window.scrollTo(0, 0); return; }
+    showOrganizer();
+  }
+  /* logo institucional, se existir ao lado da página */
+  ['logoTop', 'logoReveal'].forEach(id => {
+    const img = document.getElementById(id);
+    img.addEventListener('load', () => { img.hidden = false; });
+    img.addEventListener('error', () => { img.hidden = true; });
+    if (img.complete && img.naturalWidth > 0) img.hidden = false;
+  });
+
+  /* ===================== ligações ===================== */
+  function bindOrganizer() {
+    const evMap = { evName: 'name', evPlace: 'place', evDate: 'date', evTime: 'time', evPrice: 'price', evOrg: 'org' };
+    Object.keys(evMap).forEach(id => {
+      const el = document.getElementById(id);
+      const handler = () => { state.event[evMap[id]] = el.value; save(); renderPreview(); if (state.draw) renderSend(); };
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+    $('#ddd').addEventListener('input', e => { state.ddd = e.target.value.replace(/\D/g, '').slice(0, 2); save(); updateStatuses(); refreshLight(); });
+    const people = $('#people');
+    people.addEventListener('input', e => {
+      const row = e.target.closest('.prow');
+      if (!row) return;
+      const p = personById(row.getAttribute('data-id'));
+      if (!p) return;
+      const cl = e.target.classList;
+      if (cl.contains('in-name')) { p.name = e.target.value; renderRules(); }
+      else if (cl.contains('in-phone')) p.phone = e.target.value;
+      else if (cl.contains('in-wish')) p.wish = e.target.value;
+      save(); updateStatuses(); refreshLight();
+    });
+    people.addEventListener('change', e => {
+      if (!e.target.classList.contains('in-phone')) return;
+      const row = e.target.closest('.prow');
+      const p = personById(row.getAttribute('data-id'));
+      const ph = normalizePhone(p.phone, state.ddd);
+      if (ph.ok && ph.display.charAt(0) === '(') { p.phone = ph.display; e.target.value = ph.display; save(); updateStatuses(); }
+    });
+    people.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' || e.target.tagName !== 'INPUT') return;
+      e.preventDefault();
+      const row = e.target.closest('.prow');
+      const next = row && row.nextElementSibling;
+      if (next) { const inp = next.querySelector('.in-name'); if (inp) inp.focus(); }
+      else addPerson(true);
+    });
+    people.addEventListener('click', e => {
+      const b = e.target.closest('.rm');
+      if (!b || b.disabled) return;
+      removePerson(b.closest('.prow').getAttribute('data-id'));
+    });
+    $('#addPerson').addEventListener('click', () => addPerson(true));
+    $('#togglePaste').addEventListener('click', () => { pasteTouched = true; const open = $('#pasteBox').hidden; setPaste(open); if (open) $('#pasteText').focus(); });
+    $('#doImport').addEventListener('click', doImport);
+    $('#singleCycle').addEventListener('change', e => { state.singleCycle = e.target.checked; save(); refreshLight(); });
+    $('#addRule').addEventListener('click', () => {
+      const a = $('#ruleA').value, b = $('#ruleB').value, both = $('#ruleBoth').checked;
+      if (!a || !b) { toast('Escolha as duas pessoas da regra.', 'bad'); return; }
+      if (a === b) { toast('Escolha duas pessoas diferentes.', 'bad'); return; }
+      const dup = state.rules.some(r => (r.a === a && r.b === b) || (r.both && r.a === b && r.b === a) || (both && r.a === b && r.b === a));
+      if (dup) { toast('Essa regra já existe.'); return; }
+      state.rules.push({ id: makeCode(6), a: a, b: b, both: both });
+      save(); renderRules(); refreshLight();
+      $('#ruleA').value = ''; $('#ruleB').value = '';
+    });
+    $('#rules').addEventListener('click', e => {
+      const b = e.target.closest('.rm-rule');
+      if (!b || b.disabled) return;
+      state.rules = state.rules.filter(r => r.id !== b.getAttribute('data-id'));
+      save(); renderRules(); refreshLight();
+    });
+    const tpl = $('#tpl');
+    tpl.addEventListener('input', () => { state.tpl = tpl.value; save(); refreshLight(); if (state.draw) renderSend(); });
+    $('#tags').addEventListener('click', e => {
+      const t = e.target.closest('.tag');
+      if (!t) return;
+      const ins = t.getAttribute('data-tag');
+      const s = tpl.selectionStart, en = tpl.selectionEnd;
+      if (typeof s === 'number') { tpl.value = tpl.value.slice(0, s) + ins + tpl.value.slice(en); tpl.selectionStart = tpl.selectionEnd = s + ins.length; }
+      else tpl.value += ins;
+      tpl.focus();
+      tpl.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    $('#resetTpl').addEventListener('click', () => { tpl.value = DEFAULT_TPL; state.tpl = DEFAULT_TPL; save(); refreshLight(); if (state.draw) renderSend(); toast('Texto padrão de volta.'); });
+    $('#demoReveal').addEventListener('click', () => { showReveal(demoData(), { demo: true }); window.scrollTo(0, 0); });
+    $('#drawBtn').addEventListener('click', doDraw);
+    $('#drawGo').addEventListener('click', closeDrawModal);
+    $('#method').addEventListener('change', e => { state.method = e.target.value; save(); renderSend(); });
+    document.addEventListener('click', onSendActivate);
+    document.addEventListener('auxclick', e => { if (e.button === 1) onSendActivate(e); });
+    $('#sendList').addEventListener('click', e => {
+      const b = e.target.closest('.copy-one');
+      if (!b) return;
+      const p = personById(b.getAttribute('data-id'));
+      if (p) copyText(messageFor(p, revealUrl(tokenFor(p.id))), 'Texto de ' + p.name.trim() + ' copiado.');
+    });
+    $('#exportQueue').addEventListener('click', () => downloadText('fila-amigox-' + state.draw.code + '.json', queueJson(), 'Fila exportada'));
+    $('#copyQueue').addEventListener('click', () => copyText(queueJson(), 'Fila copiada.'));
+    $('#undoDraw').addEventListener('click', () => {
+      const sent = Object.keys(state.draw.sent).length;
+      openModal({
+        title: 'Desfazer o sorteio #' + state.draw.code + '?',
+        text: sent
+          ? 'Você já enviou ' + sent + (sent === 1 ? ' mensagem' : ' mensagens') + '. Esses links continuam mostrando o resultado antigo. Se sortear de novo, avise o grupo que vale só o sorteio novo (o código aparece no papelzinho).'
+          : 'Nenhuma mensagem foi enviada ainda. A lista volta a ficar editável.',
+        actions: [{ label: 'Desfazer sorteio', kind: 'danger-solid', run: () => { state.draw = null; saveNow(); renderAll(); toast('Sorteio desfeito.'); } }, { label: 'Cancelar' }]
+      });
+    });
+    $('#dlBackup').addEventListener('click', () => downloadText('amigox-backup' + (state.draw ? '-' + state.draw.code : '') + '.json', backupJson(), 'Backup salvo'));
+    $('#copyBackup').addEventListener('click', () => copyText(backupJson(), 'Backup copiado. Cole num arquivo de texto e guarde.'));
+    $('#restoreBtn').addEventListener('click', () => {
+      const ta = h('textarea', { id: 'restoreText', placeholder: 'Ou cole aqui o texto do backup', 'aria-label': 'Texto do backup' });
+      const file = h('input', { type: 'file', id: 'restoreFile', accept: '.json,application/json,text/plain' });
+      file.addEventListener('change', () => {
+        const f = file.files && file.files[0];
+        if (!f) return;
+        const r = new FileReader();
+        r.onload = () => { ta.value = String(r.result || ''); };
+        r.readAsText(f);
+      });
+      const node = h('div', { class: 'f' }, h('label', { class: 'f', for: 'restoreFile' }, 'Arquivo de backup (.json)', file), ta);
+      openModal({
+        title: 'Restaurar backup',
+        text: 'O backup substitui tudo o que está nesta tela.',
+        node: node,
+        actions: [{ label: 'Restaurar', kind: 'primary', keepOpen: true, run: () => {
+          const s = parseBackup(ta.value);
+          if (!s) { toast('Não reconheci esse backup.', 'bad'); return; }
+          state = s; saveNow(); closeModal(); renderAll();
+          toast('Backup restaurado' + (s.draw ? ' (sorteio #' + s.draw.code + ').' : '.'));
+        } }, { label: 'Cancelar' }]
+      });
+    });
+    $('#wipe').addEventListener('click', () => {
+      openModal({
+        title: 'Apagar tudo?',
+        text: 'Some a lista, as regras e o sorteio deste navegador. Links já enviados continuam abrindo normalmente.',
+        actions: [{ label: 'Apagar tudo', kind: 'danger-solid', run: () => { const keep = state.revealBase; state = blankState(); state.revealBase = keep; pasteTouched = false; saveNow(); renderAll(); toast('Tudo apagado.'); } }, { label: 'Cancelar' }]
+      });
+    });
+    $('#revealBase').addEventListener('change', e => {
+      const v = e.target.value.trim();
+      if (/^https?:\/\/\S+$/.test(v)) { state.revealBase = v; save(); refreshLight(); if (state.draw) renderSend(); toast('Endereço atualizado.'); }
+      else { toast('Use um endereço completo, começando com https://', 'bad'); e.target.value = state.revealBase; }
+    });
+  }
+
+  $('#slip').addEventListener('click', openSlip);
+  $('#rvHide').addEventListener('click', () => { foldSlip(); $('#slip').focus(); });
+  $('#rvBack').addEventListener('click', () => { showOrganizer(); const d = $('#demoReveal'); if (d) d.focus(); });
+  $('#modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (!$('#modal').hidden) closeModal();
+    else if (!$('#drawModal').hidden && !$('#drawResult').hidden) closeDrawModal();
+  });
+  window.addEventListener('hashchange', route);
+  window.addEventListener('storage', e => { if (e.key === STORE_KEY && organizerReady && !$('#organizer').hidden) { state = load() || blankState(); renderAll(); } });
+
+  /* API usada pelos testes e pelo envio automático (Claude no Chrome / enviar.js) */
+  window.__amigox = {
+    version: 2,
+    solveDraw: solveDraw, isOneCycle: isOneCycle, encodeToken: encodeToken, decodeToken: decodeToken, normalizePhone: normalizePhone,
+    parseList: parseList, renderTpl: renderTpl, fmtWhen: fmtWhen, toB62: toB62, fromB62: fromB62, waHref: waHref,
+    sendQueue: sendQueue, queueJson: queueJson,
+    markSent: id => markSent(id, 'auto'),
+    status: () => ({ sorteio: state.draw ? state.draw.code : null, pessoas: state.people.length, enviadas: state.draw ? Object.keys(state.draw.sent).length : 0, base: effectiveBase() })
+  };
+  route();
+})();
+</script>
+</body>
+</html>
