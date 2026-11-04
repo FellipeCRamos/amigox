@@ -342,6 +342,13 @@ details.adv .f { margin-top: 10px; }
 .rv-details > div { display: grid; gap: 2px; }
 .rv-details dt { font: 800 11.5px/1.3 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
 .rv-details dd { margin: 0; font-weight: 700; color: var(--field-ink); font-variant-numeric: tabular-nums; }
+.rv-details > div { max-width: 100%; }
+.rv-details dd { overflow-wrap: anywhere; max-width: 40ch; }
+.locked { width: min(100%, 400px); display: grid; gap: 8px; justify-items: center; padding: 26px 22px; border-radius: 4px; background-color: var(--slip); color: var(--slip-ink); background-image: repeating-linear-gradient(to bottom, transparent 0 31px, var(--slip-line) 31px 32px); background-position: 0 20px; box-shadow: 0 24px 48px var(--slip-shadow); transform: rotate(-1.4deg); margin: 10px 0 4px; }
+.locked h2 { margin: 4px 0 0; font: 800 22px/1.15 var(--font-display); }
+.locked p { margin: 0; font-size: 15px; max-width: 32ch; text-wrap: balance; }
+.locked .muted-field { color: var(--slip-muted); font-size: 14px; }
+.seal.small { width: 56px; height: 56px; font-size: 26px; }
 .rv-fine { margin: 6px 0 0; font-size: 13.5px; color: var(--field-muted); max-width: 38ch; }
 .rv-credit { margin: 18px 0 0; font-size: 12.5px; color: var(--field-muted); letter-spacing: .02em; }
 .rv-credit b { color: var(--field-ink); font-weight: 700; }
@@ -388,8 +395,9 @@ details.adv .f { margin-top: 10px; }
         <label class="f w2">Local <input type="text" id="evPlace" maxlength="60" placeholder="Ex.: Sede da SEMAM" autocomplete="off"></label>
         <label class="f">Data <input type="date" id="evDate"></label>
         <label class="f">Horário <input type="time" id="evTime"></label>
-        <label class="f">Valor sugerido <input type="text" id="evPrice" maxlength="30" placeholder="Ex.: R$ 50" autocomplete="off"></label>
+        <label class="f">Valor sugerido <input type="text" id="evPrice" maxlength="60" placeholder="Ex.: R$ 50" autocomplete="off"></label>
         <label class="f">Quem organiza <input type="text" id="evOrg" maxlength="40" placeholder="Seu nome" autocomplete="off"></label>
+        <label class="f w2">Combinado do grupo <input type="text" id="evNote" maxlength="120" placeholder="Ex.: orar o mês inteiro pelo amigo que tirou" autocomplete="off"></label>
       </div>
     </section>
 
@@ -438,6 +446,7 @@ details.adv .f { margin-top: 10px; }
             <button class="tag" type="button" data-tag="{data}">{data}</button>
             <button class="tag" type="button" data-tag="{local}">{local}</button>
             <button class="tag" type="button" data-tag="{valor}">{valor}</button>
+            <button class="tag" type="button" data-tag="{combinado}">{combinado}</button>
             <button class="tag" type="button" data-tag="{organizador}">{organizador}</button>
             <button class="tag" type="button" data-tag="{codigo}">{codigo}</button>
           </div>
@@ -541,10 +550,17 @@ details.adv .f { margin-top: 10px; }
       <p class="rv-secret">Agora é segredo até o dia da revelação.</p>
       <button class="btn on-field sm" type="button" id="rvHide">Dobrar de novo</button>
     </div>
+    <div class="locked rv-in d4" id="rvLocked" hidden>
+      <span class="seal small" aria-hidden="true">X</span>
+      <h2>Papelzinho já aberto</h2>
+      <p id="rvLockedText"></p>
+      <p class="muted-field">Se foi você e esqueceu o nome, peça para quem organiza reenviar o link.</p>
+    </div>
     <dl class="rv-details rv-in d5" id="rvDetails">
       <div id="rvWhenBox"><dt>Quando</dt><dd id="rvWhen"></dd></div>
       <div id="rvWhereBox"><dt>Onde</dt><dd id="rvWhere"></dd></div>
       <div id="rvPriceBox"><dt>Valor sugerido</dt><dd id="rvPrice"></dd></div>
+      <div id="rvNoteBox"><dt>Combinado</dt><dd id="rvNote"></dd></div>
     </dl>
     <p class="rv-fine rv-in d5" id="rvFine"></p>
     <p class="rv-credit rv-in d5">Sistema desenvolvido por <b>Fellipe Caldeira Ramos</b> · SEMAM Fundão</p>
@@ -594,6 +610,7 @@ details.adv .f { margin-top: 10px; }
     '📅 {data}',
     '📍 {local}',
     '💰 Valor sugerido: {valor}',
+    '🙏 Combinado: {combinado}',
     '',
     'Bico calado até a revelação! 🤫',
     '— {organizador}'
@@ -824,7 +841,7 @@ details.adv .f { margin-top: 10px; }
     return new Uint8Array(digits.slice(1));
   }
   function encodeToken(p) {
-    const fields = [TOKEN_V, p.code || '', p.giver || '', p.receiver || '', p.wish || '', p.event || '', p.date || '', p.time || '', p.place || '', p.price || ''];
+    const fields = [TOKEN_V, p.code || '', p.giver || '', p.receiver || '', p.wish || '', p.event || '', p.date || '', p.time || '', p.place || '', p.price || '', p.note || ''];
     const body = new TextEncoder().encode(fields.map(f => String(f).split(SEP).join(' ')).join(SEP));
     const c = check16(body);
     const ks = keystream(body.length + 2);
@@ -847,7 +864,7 @@ details.adv .f { margin-top: 10px; }
       if ((raw[0] ^ ks[0]) !== c[0] || (raw[1] ^ ks[1]) !== c[1]) return null;
       const f = new TextDecoder().decode(body).split(SEP);
       if (f.length < 10 || f[0] !== TOKEN_V || !f[3]) return null;
-      return { code: f[1], giver: f[2], receiver: f[3], wish: f[4], event: f[5], date: f[6], time: f[7], place: f[8], price: f[9] };
+      return { code: f[1], giver: f[2], receiver: f[3], wish: f[4], event: f[5], date: f[6], time: f[7], place: f[8], price: f[9], note: f[10] || '' };
     } catch (e) { return null; }
   }
 
@@ -888,7 +905,7 @@ details.adv .f { margin-top: 10px; }
   function blankState() {
     return {
       v: 1,
-      event: { name: 'Amigo X da SEMAM 2026', date: '', time: '', place: '', price: '', org: '' },
+      event: { name: 'Amigo X da SEMAM 2026', date: '', time: '', place: '', price: '', org: '', note: '' },
       ddd: '27',
       people: [],
       rules: [],
@@ -931,7 +948,9 @@ details.adv .f { margin-top: 10px; }
       if (valid) {
         const sent = {};
         if (d.sent && typeof d.sent === 'object') for (const k in d.sent) if (ids[k]) sent[k] = (d.sent[k] && typeof d.sent[k] === 'object') ? d.sent[k] : { at: Number(d.sent[k]) || Date.now(), how: 'manual' };
-        out.draw = { code: d.code, at: Number(d.at) || Date.now(), map: map, cycle: !!d.cycle, fallback: !!d.fallback, sent: sent };
+        const resend = {};
+        if (d.resend && typeof d.resend === 'object') for (const k in d.resend) if (ids[k]) resend[k] = Number(d.resend[k]) || 0;
+        out.draw = { code: d.code, at: Number(d.at) || Date.now(), map: map, cycle: !!d.cycle, fallback: !!d.fallback, sent: sent, resend: resend };
       }
     }
     return out;
@@ -956,7 +975,11 @@ details.adv .f { margin-top: 10px; }
     const b = HOSTED ? location.origin + location.pathname : (state.revealBase || DEFAULT_BASE);
     return b.split('#')[0];
   }
-  const revealUrl = tok => effectiveBase() + '#' + tok;
+  const revealUrl = (tok, serial) => effectiveBase() + '#' + tok + (serial > 1 ? '.' + serial : '');
+  /* cada reenvio ganha um número de série, para o link abrir de novo num aparelho onde já foi aberto */
+  function serialFor(id) { const d = state.draw; return d.sent[id] ? (d.resend[id] || 0) + 2 : 1; }
+  function bumpSerial(id) { const d = state.draw; if (d && d.sent[id]) { d.resend[id] = (d.resend[id] || 0) + 1; saveNow(); } }
+  const linkFor = p => revealUrl(tokenFor(p.id), serialFor(p.id));
   function currentMethods() {
     const list = [];
     if (IS_MOBILE) list.push({ v: 'app', t: 'App do WhatsApp (neste aparelho)' });
@@ -972,7 +995,7 @@ details.adv .f { margin-top: 10px; }
 
   function eventPayload() {
     const ev = state.event;
-    return { event: ev.name.trim(), date: ev.date, time: ev.time, place: ev.place.trim(), price: ev.price.trim() };
+    return { event: ev.name.trim(), date: ev.date, time: ev.time, place: ev.place.trim(), price: ev.price.trim(), note: ev.note.trim() };
   }
   function tokenFor(giverId) {
     const d = state.draw;
@@ -993,19 +1016,20 @@ details.adv .f { margin-top: 10px; }
       data: fmtWhen(ev.date, ev.time),
       local: ev.place.trim(),
       valor: ev.price.trim(),
+      combinado: ev.note.trim(),
       organizador: ev.org.trim(),
       codigo: state.draw ? state.draw.code : ''
     });
   }
   function sendHref(p) {
     const ph = normalizePhone(p.phone, state.ddd);
-    return waHref(currentMethod(), ph.digits, messageFor(p, revealUrl(tokenFor(p.id))));
+    return waHref(currentMethod(), ph.digits, messageFor(p, linkFor(p)));
   }
   function phoneDisplay(p) { const ph = normalizePhone(p.phone, state.ddd); return ph.ok ? ph.display : p.phone; }
   function sendQueue(onlyPending) {
     if (!state.draw) return [];
     return state.people.filter(p => !onlyPending || !state.draw.sent[p.id]).map(p => ({
-      id: p.id, nome: p.name.trim(), telefone: normalizePhone(p.phone, state.ddd).digits, mensagem: messageFor(p, revealUrl(tokenFor(p.id)))
+      id: p.id, nome: p.name.trim(), telefone: normalizePhone(p.phone, state.ddd).digits, mensagem: messageFor(p, linkFor(p))
     }));
   }
   function queueJson() {
@@ -1063,6 +1087,7 @@ details.adv .f { margin-top: 10px; }
     $('#evTime').value = state.event.time;
     $('#evPrice').value = state.event.price;
     $('#evOrg').value = state.event.org;
+    $('#evNote').value = state.event.note;
     $('#ddd').value = state.ddd;
     $('#tpl').value = state.tpl;
     $('#singleCycle').checked = state.singleCycle;
@@ -1301,7 +1326,7 @@ details.adv .f { margin-top: 10px; }
       openModal({ title: 'Não deu para sortear', text: msg + ' Apague alguma regra no passo 3 e sorteie de novo.', actions: [{ label: 'Entendi', kind: 'primary' }] });
       return;
     }
-    state.draw = { code: makeCode(4), at: Date.now(), map: res.map, cycle: res.cycle, fallback: !!res.fallback, sent: {} };
+    state.draw = { code: makeCode(4), at: Date.now(), map: res.map, cycle: res.cycle, fallback: !!res.fallback, sent: {}, resend: {} };
     saveNow();
     renderChip();
     showDrawAnimation();
@@ -1357,7 +1382,8 @@ details.adv .f { margin-top: 10px; }
     if (!a) return;
     if (a.getAttribute('aria-disabled') === 'true' || !a.getAttribute('href')) { e.preventDefault(); return; }
     const id = a.getAttribute('data-id');
-    setTimeout(() => markSent(id, 'manual'), 80);
+    const again = !!(state.draw && state.draw.sent[id]);
+    setTimeout(() => { if (again) bumpSerial(id); markSent(id, 'manual'); }, 80);
   }
   function backupJson() { return JSON.stringify({ app: 'amigox', v: 1, savedAt: new Date().toISOString(), state: state }, null, 2); }
   function parseBackup(text) {
@@ -1436,15 +1462,24 @@ details.adv .f { margin-top: 10px; }
 
   /* ===================== revelação ===================== */
   function setText(id, v) { document.getElementById(id).textContent = v; }
+  /* trava por aparelho: depois de aberto, o mesmo link não abre de novo neste navegador */
+  let lockKey = '';
+  function lockedAt(key) { try { const v = localStorage.getItem(key); return v ? Number(v) || 1 : 0; } catch (e) { return 0; } }
+  function lockNow() { if (!lockKey) return; try { localStorage.setItem(lockKey, String(Date.now())); } catch (e) { /* sem armazenamento: sem trava */ } }
   function showReveal(data, opts) {
+    opts = opts || {};
     document.body.classList.add('in-reveal');
     $('#organizer').hidden = true;
     $('#reveal').hidden = false;
-    $('#rvDemo').hidden = !(opts && opts.demo);
+    $('#rvDemo').hidden = !opts.demo;
     $('#rvOk').hidden = !data;
     $('#rvBad').hidden = !!data;
     startLeaves();
     if (!data) { document.title = 'Papelzinho rasgado · Amigo X'; return; }
+    const locked = !!opts.lockedAt;
+    $('#slip').hidden = locked;
+    $('#rvLocked').hidden = !locked;
+    if (locked) setText('rvLockedText', 'Este link foi aberto neste aparelho em ' + fmtDateTime(opts.lockedAt) + '. Cada papelzinho abre uma vez só.');
     document.title = 'Seu papelzinho · ' + (data.event || 'Amigo X');
     setText('rvEvent', data.event || 'Amigo X');
     setText('rvHello', 'Olá, ' + (firstName(data.giver) || 'tudo bem') + '!');
@@ -1459,7 +1494,8 @@ details.adv .f { margin-top: 10px; }
     setText('rvWhen', when); $('#rvWhenBox').hidden = !when;
     setText('rvWhere', data.place || ''); $('#rvWhereBox').hidden = !data.place;
     setText('rvPrice', data.price || ''); $('#rvPriceBox').hidden = !data.price;
-    $('#rvDetails').hidden = !when && !data.place && !data.price;
+    setText('rvNote', data.note || ''); $('#rvNoteBox').hidden = !data.note;
+    $('#rvDetails').hidden = !when && !data.place && !data.price && !data.note;
     setText('rvFine', (data.code ? 'Sorteio #' + data.code + ' · ' : '') + 'Este link é só seu. Não encaminhe.');
     foldSlip();
   }
@@ -1475,6 +1511,7 @@ details.adv .f { margin-top: 10px; }
     s.classList.add('is-open');
     s.setAttribute('aria-expanded', 'true');
     $('#rvAfter').hidden = false;
+    lockNow();
     setTimeout(() => { const n = $('#rvName'); if (n && n.focus) n.focus({ preventScroll: true }); }, 450);
     confetti();
   }
@@ -1584,7 +1621,15 @@ details.adv .f { margin-top: 10px; }
   function route() {
     let hash = '';
     try { hash = decodeURIComponent((location.hash || '').slice(1)); } catch (e) { hash = (location.hash || '').slice(1); }
-    if (/^ax\d/.test(hash)) { showReveal(decodeToken(hash), { demo: false }); window.scrollTo(0, 0); return; }
+    if (/^ax\d/.test(hash)) {
+      const parts = hash.split('.');
+      const data = decodeToken(parts[0]);
+      lockKey = data && data.code !== 'TESTE' ? 'amigox.aberto.' + hash : '';
+      showReveal(data, { demo: false, lockedAt: lockKey ? lockedAt(lockKey) : 0 });
+      window.scrollTo(0, 0);
+      return;
+    }
+    lockKey = '';
     showOrganizer();
   }
   /* logo institucional, se existir ao lado da página */
@@ -1597,7 +1642,7 @@ details.adv .f { margin-top: 10px; }
 
   /* ===================== ligações ===================== */
   function bindOrganizer() {
-    const evMap = { evName: 'name', evPlace: 'place', evDate: 'date', evTime: 'time', evPrice: 'price', evOrg: 'org' };
+    const evMap = { evName: 'name', evPlace: 'place', evDate: 'date', evTime: 'time', evPrice: 'price', evOrg: 'org', evNote: 'note' };
     Object.keys(evMap).forEach(id => {
       const el = document.getElementById(id);
       const handler = () => { state.event[evMap[id]] = el.value; save(); renderPreview(); if (state.draw) renderSend(); };
@@ -1670,7 +1715,7 @@ details.adv .f { margin-top: 10px; }
       tpl.dispatchEvent(new Event('input', { bubbles: true }));
     });
     $('#resetTpl').addEventListener('click', () => { tpl.value = DEFAULT_TPL; state.tpl = DEFAULT_TPL; save(); refreshLight(); if (state.draw) renderSend(); toast('Texto padrão de volta.'); });
-    $('#demoReveal').addEventListener('click', () => { showReveal(demoData(), { demo: true }); window.scrollTo(0, 0); });
+    $('#demoReveal').addEventListener('click', () => { lockKey = ''; showReveal(demoData(), { demo: true }); window.scrollTo(0, 0); });
     $('#drawBtn').addEventListener('click', doDraw);
     $('#drawGo').addEventListener('click', closeDrawModal);
     $('#method').addEventListener('change', e => { state.method = e.target.value; save(); renderSend(); });
@@ -1680,7 +1725,10 @@ details.adv .f { margin-top: 10px; }
       const b = e.target.closest('.copy-one');
       if (!b) return;
       const p = personById(b.getAttribute('data-id'));
-      if (p) copyText(messageFor(p, revealUrl(tokenFor(p.id))), 'Texto de ' + p.name.trim() + ' copiado.');
+      if (!p) return;
+      const text = messageFor(p, linkFor(p));
+      if (state.draw.sent[p.id]) { bumpSerial(p.id); renderSend(); }
+      copyText(text, 'Texto de ' + p.name.trim() + ' copiado.');
     });
     $('#exportQueue').addEventListener('click', () => downloadText('fila-amigox-' + state.draw.code + '.json', queueJson(), 'Fila exportada'));
     $('#copyQueue').addEventListener('click', () => copyText(queueJson(), 'Fila copiada.'));
@@ -1752,6 +1800,11 @@ details.adv .f { margin-top: 10px; }
     parseList: parseList, renderTpl: renderTpl, fmtWhen: fmtWhen, toB62: toB62, fromB62: fromB62, waHref: waHref,
     sendQueue: sendQueue, queueJson: queueJson,
     markSent: id => markSent(id, 'auto'),
+    people: () => state.people.map(p => ({ id: p.id, nome: p.name.trim(), telefone: phoneDisplay(p), sugestao: p.wish.trim() })),
+    setEvent: ev => { Object.keys(ev).forEach(k => { if (k in state.event) state.event[k] = String(ev[k]); }); saveNow(); renderAll(); return state.event; },
+    importList: text => { $('#pasteText').value = text; doImport(); return state.people.length; },
+    addRule: (a, b, both) => { state.rules.push({ id: makeCode(6), a: a, b: b, both: both !== false }); saveNow(); renderAll(); return state.rules.length; },
+    draw: () => { doDraw(); return state.draw ? state.draw.code : null; },
     status: () => ({ sorteio: state.draw ? state.draw.code : null, pessoas: state.people.length, enviadas: state.draw ? Object.keys(state.draw.sent).length : 0, base: effectiveBase() })
   };
   route();
