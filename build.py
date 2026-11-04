@@ -30,7 +30,7 @@ meta = f"""<meta charset="utf-8">
 <meta property="og:url" content="{SITE}">
 <meta property="og:image" content="{SITE}preview.jpg">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:height" content="800">
 <meta property="og:image:alt" content="Papelzinho dobrado com um selo dourado: seu papelzinho do Amigo X chegou.">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
